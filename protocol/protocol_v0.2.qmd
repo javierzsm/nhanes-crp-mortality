@@ -1,0 +1,62 @@
+---
+title: "Protocol: baseline C-reactive protein and all-cause mortality in NHANES"
+subtitle: "Version 0.2, development draft, 14 September 2026"
+format: html
+bibliography: ../references.bib
+---
+
+## Status
+
+Development draft. No mortality outcome or exposure-outcome association has been examined. Specifications marked as unresolved must be completed, reviewed and version-tagged before outcome analysis.
+
+## Research question
+
+Among US adults aged 20 years or older, is a higher baseline concentration of C-reactive protein associated with subsequent all-cause mortality?
+
+## Design
+
+Retrospective cohort analysis of continuous NHANES participants linked to the NCHS public-use mortality file.
+
+## Target population
+
+The target population is the civilian, noninstitutionalized US population aged 20 years or older represented by the pooled 1999–2000 through 2009–2010 NHANES cycles. The analytic cohort will include examined participants with a valid baseline CRP result, a positive applicable MEC examination weight and eligibility for public-use mortality linkage.
+
+## Baseline cycles and measurement audit
+
+All six cycles from 1999–2000 through 2009–2010 contain public `LBXCRP` measurements in mg/dL. NHANES documents latex-enhanced nephelometry using a Behring Nephelometer throughout this period. Adults aged 20 years or older are eligible in every cycle. The cycle audit is recorded in `docs/audits/crp_cycle_audit.md`.
+
+## Exposure
+
+Baseline CRP will be converted from mg/dL to mg/L by multiplication by 10 and modeled continuously. The principal summary will use `log2(CRP)`; a restricted cubic spline will evaluate functional form. NHANES released below-detection observations using the detection limit divided by the square root of two. These released values will be retained in the primary analysis. Alternative substitutions will be examined in sensitivity analyses.
+
+## Outcome
+
+All-cause mortality from the mobile examination center examination until death or administrative censoring on 31 December 2019.
+
+## Target estimand
+
+Adjusted hazard ratio for all-cause mortality per doubling of baseline CRP in the target population represented by the pooled NHANES cycles. This is an adjusted prognostic association, not a causal effect. If meaningful nonlinearity is present, exposure contrasts from the spline curve will supplement or replace a single summary HR in interpretation.
+
+## Planned adjustment strategy
+
+The primary model will adjust for baseline age, sex, race and Hispanic origin, educational attainment, smoking status, body mass index, diabetes, hypertension, prevalent cardiovascular disease and survey cycle. These variables will be selected from substantive knowledge rather than statistical screening. Family income-to-poverty ratio will be considered in a sensitivity model because its missingness is materially greater than that of the primary adjustment variables.
+
+Sex and age group, 20–64 versus 65 years or older, will be evaluated as pre-specified secondary effect modifiers. Interaction estimates and confidence intervals will be emphasized; subgroup findings will not replace the overall primary analysis.
+
+## Acute inflammation sensitivity analysis
+
+CRP greater than 10 mg/L will not be treated as an invalid observation or excluded from the primary analysis. A sensitivity analysis will exclude these observations because concentrations above this threshold may reflect an acute inflammatory process, for which repeat measurement has been recommended in cardiovascular risk assessment [@pearson2003markers].
+
+## Mortality-linkage eligibility
+
+The pre-outcome audit identified 34 linkage-ineligible participants among 28,924 adults with CRP and a positive MEC weight. These participants will be excluded and reported in the cohort flow. No additional linkage-eligibility weight will be estimated because ineligibility is approximately 0.12% and the public NHANES linked mortality files do not provide an eligibility-adjusted weight.
+
+## Missing baseline covariates
+
+The pre-outcome covariate audit found complete primary-model covariates for 28,031 of 28,890 mortality-linkage-eligible participants, or 97.03%. The primary analysis will therefore use complete covariate cases. Multiple imputation will be used as a sensitivity analysis if its implementation can preserve the survey design and variable coding. Income-to-poverty ratio will remain outside the primary model because adding it reduces complete records to 89.30%.
+
+## Decisions still required
+
+- complete eligibility criteria;
+- age functional form and analysis time scale;
+- reporting guideline.

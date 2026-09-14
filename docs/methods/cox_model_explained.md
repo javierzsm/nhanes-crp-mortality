@@ -1,5 +1,7 @@
 # Understanding the Cox model used in this study
 
+**Document status:** Version 0.2, 14 September 2026. Educational methods guide. This document explains the model but does not replace the protocol or statistical analysis plan. All unresolved specifications must be frozen in those documents before mortality outcome analysis.
+
 ## Purpose
 
 This guide explains the statistical model proposed for the NHANES CRP and mortality study. It progresses from the structure of one participant's record to survey-weighted Cox regression with a restricted cubic spline. The objective is to preserve the full statistical complexity while making every component traceable to an epidemiological question.
@@ -89,7 +91,7 @@ $$
 and:
 
 $$
-S(t)=\exp\{-H(t)\}
+S(t)=\exp\left(-H(t)\right)
 $$
 
 A hazard ratio is therefore not interchangeable with a risk ratio, risk difference or ratio of survival probabilities.
@@ -185,7 +187,7 @@ For two covariate patterns $a$ and $b$:
 
 $$
 HR(a,b)=\frac{h(t\mid a)}{h(t\mid b)}
-=\exp\{\eta(a)-\eta(b)\}
+=\exp\left(\eta(a)-\eta(b)\right)
 $$
 
 The difference $\eta(a)-\eta(b)$ is a contrast on the log-hazard scale. Exponentiating it produces the hazard ratio. If the contrast equals 0.182:
@@ -215,7 +217,7 @@ $$
 Under a linear effect:
 
 $$
-h_i(t)=h_0(t)\exp\{\beta\log_2(CRP_i)+\boldsymbol\gamma^T\mathbf Z_i\}
+h_i(t)=h_0(t)\exp\left(\beta\log_2(CRP_i)+\boldsymbol\gamma^T\mathbf Z_i\right)
 $$
 
 the hazard ratio per doubling is:
@@ -243,12 +245,12 @@ $$
 The Cox model becomes:
 
 $$
-h_i(t)=h_0(t)\exp[f\{\log_2(CRP_i)\}+\boldsymbol\gamma^T\mathbf Z_i]
+h_i(t)=h_0(t)\exp\left[f\left\{\log_2(CRP_i)\right\}+\boldsymbol\gamma^T\mathbf Z_i\right]
 $$
 
 The cubic pieces have matching value, slope and curvature at every knot. The restriction forces the function to be linear beyond the outer knots, where sparse data would otherwise permit unstable cubic behavior.
 
-The provisional specification uses four knots at the weighted 5th, 35th, 65th and 95th percentiles of `log2(CRP)`. Their numerical locations will be calculated and frozen before outcome modeling.
+The current SAP specification uses four knots at the weighted 5th, 35th, 65th and 95th percentiles of `log2(CRP)`. Their numerical locations will be calculated and frozen before outcome modeling.
 
 ## 13. Interpreting a spline
 
@@ -282,18 +284,18 @@ For fixed covariate patterns $a$ and $b$:
 
 $$
 \frac{h(t\mid a)}{h(t\mid b)}
-=\exp\{\eta(a)-\eta(b)\}
+=\exp\left(\eta(a)-\eta(b)\right)
 $$
 
 The right-hand side contains no time. The model assumes that the hazard ratio remains constant over follow-up, although absolute hazards may change substantially.
 
-Proportionality will be evaluated using scaled Schoenfeld residuals, formal tests, graphical assessment and, when needed, interpretable exposure-by-time interactions. A small p-value alone will not determine scientific importance.
+Proportionality will be evaluated using scaled Schoenfeld residuals, formal tests, graphical assessment and survey-weighted exposure-by-log-time interactions. If the CRP interaction p-value is below 0.05 or the residual plot shows a sustained pattern, CRP contrasts will be estimated at 5, 10 and 15 years. A constant HR will remain the primary summary only when those contrasts retain the same direction and do not materially change interpretation.
 
 Meaningful non-proportionality may be handled by time interactions, pre-specified follow-up intervals, stratification on adjustment variables or standardized survival summaries.
 
 ## 16. Tied death times
 
-Follow-up is recorded in months, so several deaths may share the same observed time. The provisional model will use Efron's approximation to handle these tied event times. This choice will be frozen in the statistical analysis plan.
+Follow-up is recorded in months, so several deaths may share the same observed time. The planned model will use Efron's approximation to handle these tied event times. This choice will be frozen in the statistical analysis plan.
 
 ## 17. Why NHANES requires survey-weighted Cox regression
 
@@ -325,15 +327,19 @@ Coefficients are estimated using survey-weighted pseudo-partial likelihood. Desi
 
 ## 18. Pooling cycles
 
-If six comparable two-year cycles are pooled, the provisional combined examination weight is:
+The cycle audit confirmed six comparable cycles spanning 12 years. NHANES supplies special four-year MEC weights for 1999–2002, so a single `WTMEC2YR/6` rule is not correct for every cycle. The combined examination weight is:
 
 $$
-w_{12-year}=\frac{WTMEC2YR}{6}
+w_{12-year}=
+\begin{cases}
+WTMEC4YR\times\frac{4}{12}, & 1999\text{--}2002\\
+WTMEC2YR\times\frac{2}{12}, & 2003\text{--}2010
+\end{cases}
 $$
 
-This is valid only after confirming common component eligibility and measurement comparability. Cycle will be included to account for baseline-period differences.
+Cycle will be included to account for baseline-period differences. These weights target the civilian, noninstitutionalized US adult population represented across the pooled survey period.
 
-Mortality-linkage eligibility also requires assessment. The study will quantify ineligibility, compare eligible and ineligible participants and determine whether an additional adjustment is necessary.
+The pre-outcome audit found 34 linkage-ineligible participants among 28,924 adults with CRP and a positive MEC weight. They will be excluded and counted in the participant flow. No additional eligibility weight will be estimated.
 
 ## 19. Statistical inference
 
@@ -382,7 +388,9 @@ The analysis will examine:
 11. early deaths;
 12. concentrations compatible with acute inflammation.
 
-Provisional sensitivity analyses exclude deaths within 12 or 24 months and repeat the analysis after excluding CRP greater than 10 mg/L. The final exclusion is not a cleaning rule; high CRP can contain genuine prognostic information.
+Sensitivity analyses will exclude deaths within 12 or 24 months and repeat the analysis after excluding CRP greater than 10 mg/L. The final exclusion is not a cleaning rule; high CRP can contain genuine prognostic information. NHANES below-detection fill values will be retained in the primary analysis, then replaced by the nominal detection limit and excluded in separate sensitivity analyses.
+
+Sex and age group, 20–64 versus 65 years or older, are pre-specified secondary effect modifiers. Their interaction estimates will be interpreted as secondary evidence rather than replacements for the overall association.
 
 ## 22. Correct and incorrect interpretations
 
@@ -434,8 +442,8 @@ Software syntax does not define the estimand. Every model term must trace back t
 
 ## Recommended reading
 
-- Nahhas RW. *Introduction to Regression Methods for Public Health Using R*, Chapter 7, Survival Analysis.
-- Nahhas RW. Chapter 8, Analyzing Complex Survey Data, especially weighted survival analysis.
-- Harrell FE Jr. *Regression Modeling Strategies*, Section 2.4 and Chapter 20.
-- Kleinbaum DG, Klein M. *Survival Analysis: A Self-Learning Text*.
-- Therneau TM, Grambsch PM. *Modeling Survival Data: Extending the Cox Model*.
+- Nahhas RW. *Introduction to Regression Methods for Public Health Using R*. Chapters 7 and 8, Survival Analysis and Analyzing Complex Survey Data. https://www.bookdown.org/rwnahhas/RMPH/
+- Harrell FE Jr. *Regression Modeling Strategies*. 2nd ed. Springer; 2015. https://doi.org/10.1007/978-3-319-19425-7
+- Kleinbaum DG, Klein M. *Survival Analysis: A Self-Learning Text*. 3rd ed. Springer; 2012. https://doi.org/10.1007/978-1-4419-6646-9
+- Therneau TM, Grambsch PM. *Modeling Survival Data: Extending the Cox Model*. Springer; 2000. https://doi.org/10.1007/978-1-4757-3294-8
+- Johnson CL, Paulose-Ram R, Ogden CL, et al. National Health and Nutrition Examination Survey: Analytic Guidelines, 1999–2010. *Vital Health Stat 2*. 2013;(161):1–24. PMID: 25090154.

@@ -1,0 +1,84 @@
+---
+title: "Statistical analysis plan: baseline C-reactive protein and all-cause mortality in NHANES"
+subtitle: "Version 0.2, development draft, 14 September 2026"
+format: html
+bibliography: ../references.bib
+---
+
+## Status
+
+Development draft. No mortality outcome or exposure-outcome association has been examined. It must not be described as frozen or pre-specified until completed, reviewed and version-tagged before outcome analysis.
+
+## Primary analysis
+
+- Model: survey-weighted Cox proportional hazards regression.
+- Time origin: mobile examination center examination.
+- Time: `PERMTH_EXM`.
+- Event: `MORTSTAT`.
+- Exposure: `log2(CRP in mg/L)`.
+- Effect measure: hazard ratio per doubling of CRP.
+- Ties: Efron approximation.
+- Variance: design-based robust variance.
+- Cycle weights: for 1999–2002, `WTMEC4YR × 4/12`; for 2003–2010, `WTMEC2YR × 2/12`.
+- Target population: civilian, noninstitutionalized US adults aged 20 years or older represented by the pooled 1999–2010 cycles.
+
+## Functional-form analysis
+
+A restricted cubic spline will be fitted to `log2(CRP)`. Four knots are planned at weighted percentiles 5, 35, 65 and 95. Knot values will be calculated and frozen before outcome modeling. The weighted median CRP will be the graphical reference.
+
+## Hypothesis tests
+
+- Linear association: design-based Wald test of the `log2(CRP)` coefficient.
+- Global spline association: joint design-based Wald test of all spline basis coefficients.
+- Nonlinearity: joint design-based Wald test of nonlinear spline components.
+
+## Adjustment models
+
+The primary model will include age, sex, race and Hispanic origin, educational attainment, smoking status, body mass index, diabetes, hypertension, prevalent cardiovascular disease and survey cycle. Age will use a restricted cubic spline; the final age knot locations will be frozen before outcome modeling. Smoking will be classified as never, former or current from `SMQ020` and `SMQ040`. Prevalent cardiovascular disease will be defined by any affirmative response for congestive heart failure, coronary heart disease, angina, myocardial infarction or stroke.
+
+The adjustment set will not be selected through univariable screening, stepwise regression or optimization of statistical significance. A sensitivity model will additionally include family income-to-poverty ratio.
+
+## Missing covariates
+
+The primary analysis will use complete cases for the pre-specified primary covariates. This retains 28,031 of 28,890 mortality-linkage-eligible participants before any outcome-based exclusions, or 97.03%. Missingness will be reported by variable and cycle. A sensitivity analysis will use multiple imputation that includes all model variables, survey design variables and mortality outcome information; estimates will be pooled across imputations using Rubin's rules with design-based variance. The imputation implementation and number of imputations must be frozen before outcome analysis.
+
+## Effect modification
+
+Secondary models will test CRP interaction terms with sex and with age group, 20–64 versus 65 years or older, separately. Interaction contrasts with 95% confidence intervals will be reported. These analyses will be interpreted as secondary and will not redefine the primary overall estimand.
+
+## Below-detection CRP
+
+`LBXCRP` is released in mg/dL. Values will be multiplied by 10 to obtain mg/L. The primary analysis will retain the NHANES fill value of 0.01 mg/dL, equivalent to the detection limit divided by the square root of two. Sensitivity analyses will replace these observations with the nominal detection limit, 0.02 mg/dL, and will separately exclude them.
+
+## Mortality-linkage eligibility
+
+Participants with `ELIGSTAT != 1` will be excluded before outcome variables are read into the analytic cohort. Their number will be reported by cycle. No additional linkage-eligibility weighting will be performed.
+
+## Proportional hazards decision process
+
+Proportionality will be evaluated using scaled Schoenfeld residual plots from an auxiliary Cox model, covariate-specific and global tests, and survey-weighted exposure-by-log-time interactions. A test result alone will not determine presentation.
+
+If the CRP term has an interaction p-value below 0.05 or its residual plot shows a sustained time pattern, time-specific CRP contrasts will be estimated at 5, 10 and 15 years. The proportional-hazards summary will remain primary when those contrasts have the same direction and do not materially change interpretation. Otherwise, the time-varying estimates and standardized survival summaries will become the principal interpretation, while the constant HR will be retained only as an average summary. The reason for this decision will be documented without reference to which interpretation is more favorable.
+
+## Sensitivity analyses
+
+- exclude deaths within 12 months;
+- exclude deaths within 24 months;
+- exclude CRP greater than 10 mg/L;
+- replace below-detection CRP with 0.02 mg/dL;
+- exclude below-detection CRP;
+- add family income-to-poverty ratio;
+- use multiple imputation for missing primary-model covariates;
+- alternative age specification;
+- compare weighted and unweighted estimates as a diagnostic.
+
+## Diagnostics
+
+- cohort flow and missingness;
+- exposure distribution and detection-limit handling;
+- event counts and follow-up distribution;
+- convergence;
+- proportional hazards;
+- functional form;
+- influence diagnostics;
+- support and uncertainty in spline tails.
