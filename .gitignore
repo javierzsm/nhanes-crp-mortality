@@ -4,3 +4,13 @@
 .Renviron
 .DS_Store
 .vscode/
+renv/library/
+renv/staging/
+data/raw/*
+data/processed/*
+output/figures/*
+output/tables/*
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+!output/figures/.gitkeep
+!output/tables/.gitkeep
