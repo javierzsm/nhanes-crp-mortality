@@ -8,21 +8,21 @@ The analysis has three defining features. The outcome is time to death rather th
 
 ## 1. What one participant contributes
 
-For participant \(i\), the analysis requires:
+For participant $i$, the analysis requires:
 
-\[
+$$
 (T_i,\delta_i,X_i,\mathbf Z_i,w_i,s_i,c_i)
-\]
+$$
 
 where:
 
-- \(T_i\) is time from the NHANES examination to death or censoring;
-- \(\delta_i\) is 1 for an observed death and 0 for censoring;
-- \(X_i\) is baseline CRP;
-- \(\mathbf Z_i\) contains adjustment variables;
-- \(w_i\) is the survey weight;
-- \(s_i\) identifies the sampling stratum;
-- \(c_i\) identifies the primary sampling unit.
+- $T_i$ is time from the NHANES examination to death or censoring;
+- $\delta_i$ is 1 for an observed death and 0 for censoring;
+- $X_i$ is baseline CRP;
+- $\mathbf Z_i$ contains adjustment variables;
+- $w_i$ is the survey weight;
+- $s_i$ identifies the sampling stratum;
+- $c_i$ identifies the primary sampling unit.
 
 The public mortality file supplies `PERMTH_EXM`, the number of months from the mobile examination center examination to death or the end of follow-up, and `MORTSTAT`, the mortality indicator. Together they define:
 
@@ -49,48 +49,48 @@ A participant is right-censored when death has not been observed by the last ava
 
 For someone censored after 120 months, we know:
 
-\[
+$$
 T_i>120
-\]
+$$
 
 The participant contributes information to every risk set during those 120 months. The Cox model assumes conditionally non-informative censoring: after accounting for modeled variables, censoring should not contain additional information about the unobserved event time.
 
 ## 4. Survival, hazard and cumulative hazard
 
-Let \(T\) be time to death. The survival function is:
+Let $T$ be time to death. The survival function is:
 
-\[
+$$
 S(t)=P(T>t)
-\]
+$$
 
-It is the probability of remaining alive beyond time \(t\).
+It is the probability of remaining alive beyond time $t$.
 
 The hazard is:
 
-\[
+$$
 h(t)=\lim_{\Delta t\rightarrow0}
 \frac{P(t\leq T<t+\Delta t\mid T\geq t)}{\Delta t}
-\]
+$$
 
-The conditioning is essential. The hazard is the instantaneous death rate among people alive immediately before \(t\). It is a rate, not a probability.
+The conditioning is essential. The hazard is the instantaneous death rate among people alive immediately before $t$. It is a rate, not a probability.
 
 The cumulative hazard is:
 
-\[
+$$
 H(t)=\int_0^t h(u)\,du
-\]
+$$
 
 and:
 
-\[
+$$
 S(t)=\exp\{-H(t)\}
-\]
+$$
 
 A hazard ratio is therefore not interchangeable with a risk ratio, risk difference or ratio of survival probabilities.
 
 ## 5. Risk sets
 
-At each observed death time \(t_k\), the risk set \(R(t_k)\) contains participants who remain under observation and alive immediately before that time.
+At each observed death time $t_k$, the risk set $R(t_k)$ contains participants who remain under observation and alive immediately before that time.
 
 | Person | Time | Event | CRP (mg/L) |
 |---|---:|---:|---:|
@@ -105,43 +105,43 @@ At time 4, A, B and C are in the risk set. D is absent because D was censored at
 
 The model specifies:
 
-\[
+$$
 h_i(t)=h_0(t)\exp(\eta_i)
-\]
+$$
 
-where \(h_0(t)\) is an unspecified baseline hazard and \(\eta_i\) is the participant's linear predictor. In an adjusted model:
+where $h_0(t)$ is an unspecified baseline hazard and $\eta_i$ is the participant's linear predictor. In an adjusted model:
 
-\[
+$$
 \eta_i=\beta X_i+\gamma_1Z_{i1}+\cdots+\gamma_pZ_{ip}
-\]
+$$
 
 The model is semiparametric. Covariate coefficients are estimated parametrically, while the baseline hazard is not assigned a particular distribution.
 
 ## 7. Partial likelihood
 
-If participant \(i\) dies at \(t_i\), without tied event times, the participant contributes:
+If participant $i$ dies at $t_i$, without tied event times, the participant contributes:
 
-\[
+$$
 \frac{\exp(\eta_i)}
 {\sum_{j\in R(t_i)}\exp(\eta_j)}
-\]
+$$
 
 The numerator is the relative hazard score of the person who died. The denominator sums the scores of everyone who could have died then. Multiplying across deaths gives the partial likelihood:
 
-\[
+$$
 L(\boldsymbol\beta)=
 \prod_{i:\delta_i=1}
 \frac{\exp(\eta_i)}
 {\sum_{j\in R(t_i)}\exp(\eta_j)}
-\]
+$$
 
-The baseline hazard cancels within each risk-set comparison, allowing the regression coefficients to be estimated without specifying \(h_0(t)\).
+The baseline hazard cancels within each risk-set comparison, allowing the regression coefficients to be estimated without specifying $h_0(t)$.
 
 ### Numerical example
 
-Assume \(\beta=0.20\) and one risk set:
+Assume $\beta=0.20$ and one risk set:
 
-| Person | \(X\) | \(\exp(0.20X)\) |
+| Person | $X$ | $\exp(0.20X)$ |
 |---|---:|---:|
 | A, observed death | 3 | 1.822 |
 | B | 1 | 1.221 |
@@ -149,9 +149,9 @@ Assume \(\beta=0.20\) and one risk set:
 
 The contribution is:
 
-\[
+$$
 \frac{1.822}{1.822+1.221+1.000}=0.451
-\]
+$$
 
 Candidate coefficients generate different contributions over all event times. The fitted coefficients maximize their product, or equivalently the sum of their logarithms.
 
@@ -171,22 +171,22 @@ Convergence means that a numerical solution was found. It does not demonstrate c
 
 Taking logarithms gives:
 
-\[
+$$
 \log h_i(t)=\log h_0(t)+\eta_i
-\]
+$$
 
-For two covariate patterns \(a\) and \(b\):
+For two covariate patterns $a$ and $b$:
 
-\[
+$$
 HR(a,b)=\frac{h(t\mid a)}{h(t\mid b)}
 =\exp\{\eta(a)-\eta(b)\}
-\]
+$$
 
-The difference \(\eta(a)-\eta(b)\) is a contrast on the log-hazard scale. Exponentiating it produces the hazard ratio. If the contrast equals 0.182:
+The difference $\eta(a)-\eta(b)$ is a contrast on the log-hazard scale. Exponentiating it produces the hazard ratio. If the contrast equals 0.182:
 
-\[
+$$
 HR=\exp(0.182)\approx1.20
-\]
+$$
 
 This is a 20% higher hazard, not a 20 percentage-point increase in mortality probability.
 
@@ -196,29 +196,29 @@ CRP typically has a long right tail. Modeling each additional mg/L as equivalent
 
 We define:
 
-\[
+$$
 X_i=\log_2(CRP_i)
-\]
+$$
 
 A one-unit increase is a doubling:
 
-\[
+$$
 \log_2(2x)-\log_2(x)=1
-\]
+$$
 
 Under a linear effect:
 
-\[
+$$
 h_i(t)=h_0(t)\exp\{\beta\log_2(CRP_i)+\boldsymbol\gamma^T\mathbf Z_i\}
-\]
+$$
 
 the hazard ratio per doubling is:
 
-\[
+$$
 HR_{doubling}=\exp(\beta)
-\]
+$$
 
-If \(\exp(\beta)=1.20\), each doubling is associated with a 20% higher hazard, conditional on the model and its assumptions.
+If $\exp(\beta)=1.20$, each doubling is associated with a 20% higher hazard, conditional on the model and its assumptions.
 
 ## 11. Why a spline is still needed
 
@@ -228,17 +228,17 @@ The logarithmic transformation changes the exposure scale but still assumes a st
 
 A spline constructs a smooth function from connected polynomial pieces. Their meeting locations are knots. Knots are mathematical devices, not clinical thresholds or exposure categories.
 
-Using basis functions \(B_m(X)\):
+Using basis functions $B_m(X)$:
 
-\[
+$$
 f(X)=\beta_1B_1(X)+\cdots+\beta_qB_q(X)
-\]
+$$
 
 The Cox model becomes:
 
-\[
+$$
 h_i(t)=h_0(t)\exp[f\{\log_2(CRP_i)\}+\boldsymbol\gamma^T\mathbf Z_i]
-\]
+$$
 
 The cubic pieces have matching value, slope and curvature at every knot. The restriction forces the function to be linear beyond the outer knots, where sparse data would otherwise permit unstable cubic behavior.
 
@@ -246,12 +246,12 @@ The provisional specification uses four knots at the weighted 5th, 35th, 65th an
 
 ## 13. Interpreting a spline
 
-Individual spline coefficients are not epidemiological effects. They multiply artificial basis functions and must be combined. For concentrations \(x\) and \(x_{ref}\):
+Individual spline coefficients are not epidemiological effects. They multiply artificial basis functions and must be combined. For concentrations $x$ and $x_{ref}$:
 
-\[
+$$
 HR(x,x_{ref})=
 \exp\left[f\{\log_2(x)\}-f\{\log_2(x_{ref})\}\right]
-\]
+$$
 
 If 2 mg/L is the reference and the estimated HR at 8 mg/L is 1.45, the estimated hazard at 8 mg/L is 45% higher than at 2 mg/L, conditional on adjustment variables. It is not a cumulative mortality-risk difference.
 
@@ -272,12 +272,12 @@ Model interpretation must also consider the curve, confidence band, tail informa
 
 ## 15. Proportional hazards assumption
 
-For fixed covariate patterns \(a\) and \(b\):
+For fixed covariate patterns $a$ and $b$:
 
-\[
+$$
 \frac{h(t\mid a)}{h(t\mid b)}
 =\exp\{\eta(a)-\eta(b)\}
-\]
+$$
 
 The right-hand side contains no time. The model assumes that the hazard ratio remains constant over follow-up, although absolute hazards may change substantially.
 
@@ -321,9 +321,9 @@ Coefficients are estimated using survey-weighted pseudo-partial likelihood. Desi
 
 If six comparable two-year cycles are pooled, the provisional combined examination weight is:
 
-\[
+$$
 w_{12-year}=\frac{WTMEC2YR}{6}
-\]
+$$
 
 This is valid only after confirming common component eligibility and measurement comparability. Cycle will be included to account for baseline-period differences.
 
@@ -333,16 +333,16 @@ Mortality-linkage eligibility also requires assessment. The study will quantify 
 
 For a linear CRP term:
 
-\[
+$$
 H_0:\beta=0
-\]
+$$
 
 and:
 
-\[
+$$
 CI_{95\%}=
 \exp\left[\hat\beta\pm1.96SE_{design}(\hat\beta)\right]
-\]
+$$
 
 Multi-parameter spline terms will be evaluated with design-based joint Wald tests. Ordinary likelihood-ratio tests are not automatically appropriate for a survey-weighted pseudolikelihood fit.
 
@@ -410,7 +410,7 @@ Software syntax does not define the estimand. Every model term must trace back t
 ## 24. Exercises
 
 1. A participant is alive when follow-up ends after 132 months. What are the observed time and event indicator?
-2. If \(\hat\beta=0.15\) for `log2(CRP)`, calculate the HR for 4 versus 2 mg/L and 8 versus 2 mg/L.
+2. If $\hat\beta=0.15$ for `log2(CRP)`, calculate the HR for 4 versus 2 mg/L and 8 versus 2 mg/L.
 3. Why is someone censored before a death time absent from that death's risk set?
 4. Why are individual spline coefficients not separately interpretable?
 5. Distinguish the global spline association test from the nonlinearity test.
@@ -418,7 +418,7 @@ Software syntax does not define the estimand. Every model term must trace back t
 ## 25. Solutions
 
 1. Time is 132 months and the event indicator is 0.
-2. For 4 versus 2 mg/L, \(HR=\exp(0.15)=1.162\). For 8 versus 2 mg/L, \(HR=\exp(0.30)=1.350\).
+2. For 4 versus 2 mg/L, $HR=\exp(0.15)=1.162$. For 8 versus 2 mg/L, $HR=\exp(0.30)=1.350$.
 3. After censoring, continued survival is unknown, so the person cannot be confirmed as available to experience the later event.
 4. The coefficients multiply artificial basis functions; interpretation requires their joint value and a contrast between exposure values.
 5. The global test asks whether all CRP terms are jointly zero; the nonlinearity test asks whether nonlinear terms are zero after retaining the linear component.
