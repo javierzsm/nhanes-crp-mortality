@@ -1,0 +1,47 @@
+---
+title: "Protocol: baseline C-reactive protein and all-cause mortality in NHANES"
+subtitle: "Version 0.1, development draft"
+format: html
+bibliography: ../references.bib
+---
+
+## Status
+
+Development draft. No outcome analysis has been performed and no specification is frozen.
+
+## Research question
+
+Among US adults aged 20 years or older, is a higher baseline concentration of C-reactive protein associated with subsequent all-cause mortality?
+
+## Design
+
+Retrospective cohort analysis of continuous NHANES participants linked to the NCHS public-use mortality file.
+
+## Provisional population
+
+Adults aged 20 years or older examined in six NHANES cycles from 1999–2000 through 2009–2010, subject to confirmation of CRP comparability and covariate availability.
+
+## Exposure
+
+Baseline CRP, harmonized to mg/L and modeled continuously. The principal summary will use `log2(CRP)`; a restricted cubic spline will evaluate functional form.
+
+## Outcome
+
+All-cause mortality from the mobile examination center examination until death or administrative censoring on 31 December 2019.
+
+## Target estimand
+
+Adjusted hazard ratio for all-cause mortality per doubling of baseline CRP in the target population represented by the pooled NHANES cycles. If meaningful nonlinearity is present, exposure contrasts from the spline curve will supplement or replace a single summary HR in interpretation.
+
+## Decisions still required
+
+- final cycle inclusion;
+- complete eligibility criteria;
+- causal diagram and adjustment set;
+- missing-data strategy;
+- mortality-linkage eligibility adjustment;
+- age functional form and analysis time scale;
+- spline specification;
+- subgroup and sensitivity analyses;
+- reporting guideline.
+

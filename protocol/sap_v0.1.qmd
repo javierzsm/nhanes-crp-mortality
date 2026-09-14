@@ -1,0 +1,57 @@
+---
+title: "Statistical analysis plan: baseline C-reactive protein and all-cause mortality in NHANES"
+subtitle: "Version 0.1, development draft"
+format: html
+bibliography: ../references.bib
+---
+
+## Status
+
+Initial scaffold. It must not be described as frozen or pre-specified until completed, reviewed and version-tagged before outcome analysis.
+
+## Primary analysis, provisional
+
+- Model: survey-weighted Cox proportional hazards regression.
+- Time origin: mobile examination center examination.
+- Time: `PERMTH_EXM`.
+- Event: `MORTSTAT`.
+- Exposure: `log2(CRP in mg/L)`.
+- Effect measure: hazard ratio per doubling of CRP.
+- Ties: Efron approximation.
+- Variance: design-based robust variance.
+- Cycle weights: two-year MEC weights divided by the number of comparable included cycles, subject to audit.
+
+## Functional-form analysis, provisional
+
+A restricted cubic spline will be fitted to `log2(CRP)`. Four knots are provisionally located at weighted percentiles 5, 35, 65 and 95. Knot values will be calculated and frozen before outcome modeling. The weighted median CRP will be the graphical reference.
+
+## Hypothesis tests
+
+- Linear association: design-based Wald test of the `log2(CRP)` coefficient.
+- Global spline association: joint design-based Wald test of all spline basis coefficients.
+- Nonlinearity: joint design-based Wald test of nonlinear spline components.
+
+## Adjustment models
+
+Adjustment sets remain to be defined using substantive knowledge and a causal diagram. They will not be selected through univariable screening, stepwise regression or optimization of statistical significance.
+
+## Sensitivity analyses, provisional
+
+- exclude deaths within 12 months;
+- exclude deaths within 24 months;
+- exclude CRP greater than 10 mg/L;
+- alternative age specification;
+- evaluate adjustment for mortality-linkage eligibility;
+- compare weighted and unweighted estimates as a diagnostic.
+
+## Diagnostics
+
+- cohort flow and missingness;
+- exposure distribution and detection-limit handling;
+- event counts and follow-up distribution;
+- convergence;
+- proportional hazards;
+- functional form;
+- influence diagnostics;
+- support and uncertainty in spline tails.
+
