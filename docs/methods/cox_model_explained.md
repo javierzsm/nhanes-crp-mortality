@@ -340,16 +340,17 @@ Mortality-linkage eligibility also requires assessment. The study will quantify 
 For a linear CRP term:
 
 ```math
-$$
 H_0:\beta=0
-$$
+```
 
 and:
 
-$$
-CI_{95\%}=
-\exp\left[\hat\beta\pm1.96SE_{design}(\hat\beta)\right]
-$$
+```math
+CI_{95\%}
+=
+\exp\left[
+\hat{\beta}\pm 1.96\,SE_{\mathrm{design}}(\hat{\beta})
+\right]
 ```
 
 Multi-parameter spline terms will be evaluated with design-based joint Wald tests. Ordinary likelihood-ratio tests are not automatically appropriate for a survey-weighted pseudolikelihood fit.
