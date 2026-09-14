@@ -67,10 +67,16 @@ It is the probability of remaining alive beyond time $t$.
 
 The hazard is:
 
-$$
-h(t)=\lim_{\Delta t\rightarrow0}
-\frac{P(t\leq T<t+\Delta t\mid T\geq t)}{\Delta t}
-$$
+```math
+h(t)
+=
+\lim_{\Delta t \to 0}
+\frac{
+  \Pr\left(t \leq T < t+\Delta t \mid T \geq t\right)
+}{
+  \Delta t
+}
+```
 
 The conditioning is essential. The hazard is the instantaneous death rate among people alive immediately before $t$. It is a rate, not a probability.
 
