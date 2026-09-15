@@ -4,9 +4,9 @@ Reproducible cohort study of baseline C-reactive protein and subsequent all-caus
 
 ## Project status
 
-**Protocol development. No outcome analysis has been performed.**
+**Analysis specification frozen before outcome analysis.**
 
-The exposure, cycle and mortality-linkage audits are complete. No mortality outcome or exposure-outcome association has been examined. Remaining specifications must be completed, reviewed and frozen before outcome analysis.
+The exposure, cycle, mortality-linkage, covariate and final eligibility audits are complete. No mortality outcome, follow-up distribution or exposure-outcome association was examined before specification freeze. Protocol version 0.3 and statistical analysis plan version 0.3 define the frozen analysis.
 
 ## Preliminary research question
 
@@ -27,8 +27,8 @@ The [Cox model guide](docs/methods/cox_model_explained.md) explains the complete
 
 Current development documents:
 
-- [Protocol version 0.2](protocol/protocol_v0.2.qmd)
-- [Statistical analysis plan version 0.2](protocol/sap_v0.2.qmd)
+- [Protocol version 0.3](protocol/protocol_v0.3.qmd)
+- [Statistical analysis plan version 0.3](protocol/sap_v0.3.qmd)
 
 ## Planned workflow
 
@@ -41,9 +41,14 @@ Current development documents:
 
 ## Completed pre-outcome audit
 
-The [CRP cycle audit](docs/audits/crp_cycle_audit.md) documents availability, measurement comparability, detection-limit handling, survey weights and mortality-linkage eligibility for 1999–2010. The [covariate audit](docs/audits/covariate_availability_audit.md) documents variable availability and pre-outcome missingness. The accompanying R scripts reproduce both inventories without reading mortality status or follow-up time.
+The [CRP cycle audit](docs/audits/crp_cycle_audit.md) documents availability, measurement comparability, detection-limit handling, survey weights and mortality-linkage eligibility for 1999–2010. The [covariate audit](docs/audits/covariate_availability_audit.md) documents variable availability and preliminary pre-outcome missingness. The [eligibility and category-code audit](docs/audits/eligibility_category_audit.md) documents special-code recoding, pregnancy handling, participant uniqueness and the final pre-outcome cohort flow. The accompanying R scripts reproduce all inventories without reading mortality status or follow-up time.
+
+After excluding 1,135 participants with confirmed pregnancy, 27,755 participants remain eligible for the primary cohort. Of these, 26,818, or 96.62%, have complete primary-model covariates. These counts precede mortality outcome processing.
 
 ## Author
 
-Javier Zorrilla de San Martin  
+Javier Zorrilla de San Martin
+
+[LinkedIn](https://www.linkedin.com/in/javierzsm/)
+
 ORCID: [0000-0003-2848-7482](https://orcid.org/0000-0003-2848-7482)

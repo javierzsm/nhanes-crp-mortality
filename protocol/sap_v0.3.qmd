@@ -1,0 +1,155 @@
+---
+title: "Statistical analysis plan: baseline C-reactive protein and all-cause mortality in NHANES"
+subtitle: "Version 0.3, frozen before outcome analysis, 15 September 2026"
+format: html
+bibliography: ../references.bib
+---
+
+## Status
+
+Frozen pre-outcome SAP. No mortality status, follow-up distribution or
+exposure-outcome association was examined before specification freeze. All
+planned pre-outcome audits were completed before the corresponding annotated Git
+tag was created.
+
+## Primary estimand and hypothesis
+
+The primary estimand is the adjusted prognostic hazard ratio for all-cause
+mortality per doubling of baseline CRP. It is not a causal effect.
+
+The two-sided primary hypothesis is:
+
+```math
+H_0: \beta_{\log_2(CRP)}=0
+```
+
+against:
+
+```math
+H_1: \beta_{\log_2(CRP)}\neq0
+```
+
+with `alpha = 0.05`.
+
+## Primary analysis
+
+- Model: survey-weighted Cox proportional hazards regression.
+- Time origin: mobile examination center examination.
+- Time scale: elapsed months from examination, `PERMTH_EXM`.
+- Event: all-cause mortality, `MORTSTAT`.
+- Exposure: `log2(CRP in mg/L)`.
+- Effect measure: hazard ratio per doubling of CRP.
+- Ties: Efron approximation.
+- Variance: design-based robust variance.
+- Survey design: MEC weight, `SDMVSTRA` and `SDMVPSU`.
+- Cycle weights: `WTMEC4YR / 3` for 1999–2002 and `WTMEC2YR / 6`
+  for 2003–2010.
+
+## Eligibility
+
+Participants must be aged 20 years or older, have positive measured CRP, have a
+positive applicable MEC weight and be eligible for public mortality linkage.
+Participants with confirmed pregnancy at examination will be excluded. An
+indeterminate pregnancy status among participants aged 20–44 years will be
+retained in the primary cohort and excluded in a sensitivity analysis. Mortality
+status and follow-up time will be read only after this SAP is frozen. Final cohort
+counts after special-code recoding depend on QC 03 and will be inserted before
+freezing.
+
+## Functional form
+
+The primary CRP term is linear on the base-2 logarithmic scale. A restricted cubic
+spline of `log2(CRP)` will use four knots at survey-weighted percentiles 5, 35, 65
+and 95. The graphical reference will be 1 mg/L. Planned contrasts are 2, 4 and
+8 mg/L versus 1 mg/L.
+
+Age will use a restricted cubic spline with four knots at its survey-weighted
+percentiles 5, 35, 65 and 95. Exposure and age knot values will be calculated and
+recorded before outcome modeling.
+
+The linear association will be assessed with a design-based Wald test. Global
+spline association and nonlinearity will be assessed by joint design-based Wald
+tests of the appropriate spline coefficients.
+
+## Adjustment models
+
+The demographic model includes age, sex, race and Hispanic origin, and survey
+cycle. The primary model additionally includes educational attainment, smoking
+status, body mass index, diabetes, hypertension and prevalent cardiovascular
+disease. A sensitivity model additionally includes family income-to-poverty ratio.
+
+The primary inferential result comes from the fully adjusted primary model. Models
+will not be selected using univariable screening, stepwise procedures, AIC or
+optimization of statistical significance.
+
+## Missing covariates
+
+After confirmed pregnancy exclusion, the primary eligible cohort contains 27,755
+participants. The primary complete-case analysis contains 26,818 participants,
+or 96.62%, after explicit recoding of numeric special-missing codes. Adding
+income-to-poverty ratio reduces complete records to 24,683, or 88.93% of the
+primary eligible cohort.
+
+The sensitivity analysis will use 50 multiply imputed datasets. Predictive mean
+matching is planned for continuous covariates and appropriate binary or
+multinomial regression for categorical covariates. The imputation model will
+include CRP, all analysis covariates, cycle, survey design variables, mortality
+status and a representation of cumulative baseline hazard. CRP, mortality status,
+follow-up time, weights, strata and primary sampling units will not be imputed.
+
+The survey-weighted Cox model will be fitted within every imputed dataset.
+Coefficients and design-based variances will be combined using Rubin's rules. The
+implementation will be tested on outcome-blinded synthetic inputs before use.
+
+## Proportional hazards
+
+Proportionality will be evaluated through a survey-weighted CRP-by-log-time
+interaction. Scaled Schoenfeld residual plots and covariate-specific and global
+tests from an auxiliary Cox model will be supportive diagnostics.
+
+If the CRP interaction has `p < 0.05`, or diagnostics show a sustained and
+scientifically relevant temporal pattern, CRP contrasts will be reported at 5, 10
+and 15 years. A constant hazard ratio will remain the principal summary only when
+time-specific estimates retain the same direction and do not materially change
+interpretation.
+
+## Effect modification
+
+Secondary models will separately test interactions between CRP and sex, and
+between CRP and age group, 20–64 versus 65 years or older. Interaction contrasts
+and 95% confidence intervals will be reported. No additional subgroup analysis is
+pre-specified.
+
+## Sensitivity analyses
+
+1. Exclude deaths within 12 months.
+2. Exclude deaths within 24 months.
+3. Exclude CRP greater than 10 mg/L.
+4. Replace below-detection CRP with 0.02 mg/dL.
+5. Exclude below-detection CRP.
+6. Add family income-to-poverty ratio.
+7. Use multiple imputation for missing covariates.
+8. Use an alternative age specification.
+9. Compare weighted and unweighted estimates as a diagnostic only.
+10. Exclude participants aged 20–44 years with indeterminate pregnancy status.
+
+## Multiplicity and interpretation
+
+There is one primary confirmatory hypothesis. Spline, interaction and sensitivity
+analyses are secondary. They will be reported with estimates, confidence intervals
+and p-values, but will not be treated as independent confirmatory discoveries. No
+general multiplicity correction is planned.
+
+## Outputs and diagnostics
+
+Planned outputs include the cohort flow, weighted baseline characteristics, CRP
+and `log2(CRP)` distributions, event and person-time summaries, nested-model hazard
+ratios, the spline curve, proportional-hazards diagnostics, influence diagnostics,
+subgroup interactions and the sensitivity-analysis table.
+
+## Specification freeze
+
+QC 03 has been executed and reviewed, and final pre-outcome cohort counts have
+been inserted. Both documents rendered successfully and underwent final review
+before the annotated specification tag. Any subsequent change must be documented
+prospectively as a numbered amendment.

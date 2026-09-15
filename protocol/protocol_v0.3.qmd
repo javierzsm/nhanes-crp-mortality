@@ -1,0 +1,120 @@
+---
+title: "Protocol: baseline C-reactive protein and all-cause mortality in NHANES"
+subtitle: "Version 0.3, frozen before outcome analysis, 15 September 2026"
+format: html
+bibliography: ../references.bib
+---
+
+## Status
+
+Frozen pre-outcome protocol. No mortality status, follow-up distribution or
+exposure-outcome association was examined before specification freeze. All
+planned pre-outcome audits were completed before the corresponding annotated Git
+tag was created.
+
+## Research question
+
+Among US adults aged 20 years or older, is a higher baseline concentration of
+C-reactive protein associated with subsequent all-cause mortality?
+
+## Design and target population
+
+This is a retrospective cohort analysis of continuous NHANES participants linked
+to the NCHS public-use mortality file. The target population is the civilian,
+noninstitutionalized US population aged 20 years or older represented by the
+pooled 1999–2000 through 2009–2010 cycles.
+
+Eligible participants must have a valid baseline CRP result, a positive applicable
+MEC examination weight, eligibility for public-use mortality linkage and valid
+follow-up information. Participants with confirmed pregnancy at examination will
+be excluded because pregnancy changes CRP physiology and makes baseline BMI less
+comparable. Participants aged 20–44 years with indeterminate pregnancy status will
+be retained in the primary analysis and excluded in a sensitivity analysis.
+
+## Exposure
+
+Baseline CRP will be converted from mg/dL to mg/L by multiplication by 10. The
+primary exposure will be `log2(CRP)`, so its coefficient represents a doubling of
+CRP. A restricted cubic spline will assess whether the adjusted association is
+nonlinear.
+
+NHANES released below-detection observations using the detection limit divided by
+the square root of two. These values will be retained in the primary analysis.
+Sensitivity analyses will substitute the nominal detection limit and separately
+exclude below-detection observations.
+
+## Outcome and time scale
+
+The outcome is all-cause mortality through 31 December 2019. The primary time
+scale is elapsed time from the mobile examination center examination to death or
+administrative censoring. Age will be modeled flexibly as a baseline covariate.
+
+## Target estimand
+
+The target estimand is the adjusted hazard ratio for all-cause mortality per
+doubling of baseline CRP. This is an adjusted prognostic association, not a causal
+effect of intervening on CRP. If nonlinearity is supported, pre-specified contrasts
+from the spline curve will supplement the single linear hazard ratio.
+
+## Adjustment strategy
+
+The primary model will adjust for baseline age, sex, race and Hispanic origin,
+educational attainment, smoking status, body mass index, diabetes, hypertension,
+prevalent cardiovascular disease and survey cycle. Covariates are selected from
+substantive knowledge and will not be screened by univariable p-values.
+
+Three nested presentations will be used:
+
+1. demographic adjustment for age, sex, race and Hispanic origin, and cycle;
+2. the fully adjusted primary model;
+3. the primary model plus family income-to-poverty ratio as a sensitivity analysis.
+
+The nested models describe how adjustment changes the CRP estimate. They are not
+competing models selected according to statistical fit.
+
+## Survey design
+
+All primary inference will incorporate the MEC weight, sampling stratum and
+primary sampling unit. Pooled weights will use `WTMEC4YR / 3` for 1999–2002 and
+`WTMEC2YR / 6` for 2003–2010.
+
+## Missing baseline covariates
+
+After excluding 1,135 participants with confirmed pregnancy, 27,755 participants
+remain eligible for the primary cohort. Following explicit recoding of numeric
+*refused* and *don't know* responses, 26,818, or 96.62%, have complete primary-model
+covariates. Adding income-to-poverty ratio reduces complete records to 24,683,
+or 88.93% of the primary eligible cohort.
+
+Multiple imputation will be a sensitivity analysis. Fifty imputed datasets are
+planned; each will be analyzed with the same survey-weighted Cox model, and
+estimates will be combined using Rubin's rules. CRP, mortality status, follow-up
+time and survey design identifiers will not themselves be imputed.
+
+## Effect modification
+
+Sex and age group, 20–64 versus 65 years or older, will be evaluated separately as
+pre-specified secondary effect modifiers. Formal interaction tests and confidence
+intervals will be reported. Subgroup findings will not replace the overall primary
+analysis.
+
+## Sensitivity analyses
+
+Planned sensitivities include exclusion of CRP greater than 10 mg/L, alternative
+handling of below-detection CRP, exclusion of early deaths, adjustment for family
+income-to-poverty ratio, multiple imputation, an alternative age specification and
+diagnostic comparison of weighted and unweighted estimates.
+
+## Reporting
+
+Reporting will follow STROBE and the RECORD extension where applicable. Completed
+checklists will accompany the final report. NHANES analytic guidance will govern
+the complex survey design.
+
+## Specification freeze
+
+The three pre-outcome audits have confirmed exposure availability, linkage
+eligibility, category coding, final missingness, pregnancy counts, participant
+uniqueness and cohort flow. The protocol and statistical analysis plan rendered
+successfully and underwent final review before the annotated specification tag.
+Any subsequent change must be documented prospectively as a numbered amendment.

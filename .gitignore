@@ -10,6 +10,8 @@ data/raw/*
 data/processed/*
 output/figures/*
 output/tables/*
+protocol/*.html
+protocol/*_files/
 !data/raw/.gitkeep
 !data/processed/.gitkeep
 !output/figures/.gitkeep
