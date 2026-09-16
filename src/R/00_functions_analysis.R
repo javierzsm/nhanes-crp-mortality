@@ -167,3 +167,98 @@ validate_cox_model <- function(model, exposure = "log2_crp") {
   }
   invisible(TRUE)
 }
+
+restricted_cubic_spline_basis <- function(x, knots) {
+  knots <- sort(as.numeric(knots))
+  if (length(knots) < 3L || any(!is.finite(knots)) ||
+      any(diff(knots) <= 0)) {
+    stop("Restricted cubic spline knots must be finite and distinct.",
+         call. = FALSE)
+  }
+
+  truncated_cube <- function(value) pmax(value, 0)^3
+  last <- length(knots)
+  scale_factor <- (knots[last] - knots[1])^2
+
+  nonlinear <- do.call(
+    cbind,
+    lapply(seq_len(last - 2L), function(index) {
+      truncated_cube(x - knots[index]) -
+        truncated_cube(x - knots[last - 1L]) *
+          (knots[last] - knots[index]) /
+          (knots[last] - knots[last - 1L]) +
+        truncated_cube(x - knots[last]) *
+          (knots[last - 1L] - knots[index]) /
+          (knots[last] - knots[last - 1L])
+    })
+  ) / scale_factor
+
+  basis <- cbind(linear = x, nonlinear)
+  colnames(basis) <- c(
+    "linear",
+    paste0("nonlinear", seq_len(ncol(basis) - 1L))
+  )
+  basis
+}
+
+add_crp_spline_basis <- function(data, knots) {
+  basis <- restricted_cubic_spline_basis(data$log2_crp, knots)
+  if (ncol(basis) != 3L) {
+    stop("The four-knot CRP spline must have three basis columns.",
+         call. = FALSE)
+  }
+  data$crp_rcs_linear <- basis[, 1]
+  data$crp_rcs_nonlinear1 <- basis[, 2]
+  data$crp_rcs_nonlinear2 <- basis[, 3]
+  data
+}
+
+design_wald_test <- function(model, terms, test_name) {
+  require_package("survey")
+  test <- survey::regTermTest(
+    model,
+    stats::reformulate(terms),
+    method = "Wald"
+  )
+
+  data.frame(
+    test = test_name,
+    numerator_df = as.numeric(test$df),
+    denominator_df = as.numeric(test$ddf),
+    f_statistic = as.numeric(test$Ftest),
+    p_value = as.numeric(test$p),
+    stringsAsFactors = FALSE
+  )
+}
+
+spline_contrast <- function(model, comparison_mg_l, reference_mg_l, knots) {
+  terms <- c("crp_rcs_linear", "crp_rcs_nonlinear1", "crp_rcs_nonlinear2")
+  comparison_basis <- restricted_cubic_spline_basis(
+    log2(comparison_mg_l), knots
+  )
+  reference_basis <- restricted_cubic_spline_basis(
+    log2(reference_mg_l), knots
+  )
+  if (!identical(dim(comparison_basis), c(1L, 3L)) ||
+      !identical(dim(reference_basis), c(1L, 3L))) {
+    stop("Unexpected spline contrast basis dimensions.", call. = FALSE)
+  }
+  contrast <- as.numeric(comparison_basis - reference_basis)
+
+  coefficients <- stats::coef(model)[terms]
+  variance <- stats::vcov(model)[terms, terms, drop = FALSE]
+  log_hazard_ratio <- sum(contrast * coefficients)
+  standard_error <- sqrt(as.numeric(t(contrast) %*% variance %*% contrast))
+  multiplier <- stats::qnorm(1 - analysis_alpha / 2)
+
+  data.frame(
+    comparison_crp_mg_l = comparison_mg_l,
+    reference_crp_mg_l = reference_mg_l,
+    log_hazard_ratio = log_hazard_ratio,
+    standard_error = standard_error,
+    hazard_ratio = exp(log_hazard_ratio),
+    confidence_low = exp(log_hazard_ratio - multiplier * standard_error),
+    confidence_high = exp(log_hazard_ratio + multiplier * standard_error),
+    stringsAsFactors = FALSE
+  )
+}
