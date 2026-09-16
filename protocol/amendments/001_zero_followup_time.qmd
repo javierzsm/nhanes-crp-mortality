@@ -1,0 +1,56 @@
+---
+title: "Amendment 001: same-month deaths with zero released follow-up"
+subtitle: "Post-freeze amendment before association modelling, 16 September 2026"
+format: html
+---
+
+## Status
+
+Prospective amendment to protocol and SAP version 0.3. It was written after the
+mortality fields were opened, but before any exposure-outcome association model
+was fitted.
+
+## Trigger
+
+The frozen SAP specified elapsed months from the MEC examination as the primary
+time scale, using `PERMTH_EXM` from the 2019 public-use linked mortality files.
+During cohort construction, four eligible participants had `PERMTH_EXM = 0` and
+`MORTSTAT = 1`. These observations were distributed across the 2001–2002,
+2003–2004 and 2007–2008 cycles. No censored participant had zero follow-up.
+
+The combination indicates a death recorded in the same monthly interval as the
+MEC examination. It is not compatible with a Cox model if represented as an
+event at exactly zero elapsed time.
+
+## Decision
+
+For these four records only, the primary analysis will assign 0.5 months of
+follow-up, the midpoint of the first monthly interval. The released value will
+remain unchanged in `follow_up_months_released`; the analysis value will be
+stored separately in `follow_up_months`; and `zero_follow_up_death` will identify
+the affected records.
+
+The cohort-building script must verify that exactly four zero-month records are
+present and that all four are deaths. Any different count or any zero-month
+censored record will stop the pipeline.
+
+## Sensitivity analysis
+
+A sensitivity analysis will refit the primary model after excluding the four
+same-month deaths. This will assess whether the midpoint convention materially
+affects the estimated CRP association.
+
+## Rationale
+
+The exact event day is unavailable in the public-use file. Assigning the midpoint
+of the known monthly interval preserves the observed deaths, produces a positive
+analysis time and makes the approximation explicit. Exclusion is not used in the
+primary analysis because it would discard observed outcome events solely because
+their public follow-up time is grouped to months.
+
+## Classification
+
+This is an outcome-informed, post-freeze implementation amendment. It does not
+change the exposure, outcome definition, eligible population, covariates,
+estimand or primary model. It resolves a time-coding condition that could not be
+quantified during the pre-outcome audits.
