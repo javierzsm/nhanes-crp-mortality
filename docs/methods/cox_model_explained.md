@@ -12,9 +12,9 @@ The analysis has three defining features. The outcome is time to death rather th
 
 For participant $i$, the analysis requires:
 
-$$
+```math
 (T_i,\delta_i,X_i,\mathbf Z_i,w_i,s_i,c_i)
-$$
+```
 
 where:
 
@@ -51,9 +51,9 @@ A participant is right-censored when death has not been observed by the last ava
 
 For someone censored after 120 months, we know:
 
-$$
+```math
 T_i>120
-$$
+```
 
 The participant contributes information to every risk set during those 120 months. The Cox model assumes conditionally non-informative censoring: after accounting for modeled variables, censoring should not contain additional information about the unobserved event time.
 
@@ -61,15 +61,15 @@ The participant contributes information to every risk set during those 120 month
 
 Let $T$ be time to death. The survival function is:
 
-$$
+```math
 S(t)=P(T>t)
-$$
+```
 
 It is the probability of remaining alive beyond time $t$.
 
 The hazard is:
 
-$$
+```math
 h(t)=
 \lim_{\Delta t \to 0}
 \frac{
@@ -77,20 +77,20 @@ h(t)=
 }{
   \Delta t
 }
-$$
+```
 The conditioning is essential. The hazard is the instantaneous death rate among people alive immediately before $t$. It is a rate, not a probability.
 
 The cumulative hazard is:
 
-$$
+```math
 H(t)=\int_0^t h(u)\,du
-$$
+```
 
 and:
 
-$$
+```math
 S(t)=\exp(-H(t))
-$$
+```
 
 A hazard ratio is therefore not interchangeable with a risk ratio, risk difference or ratio of survival probabilities.
 
@@ -111,15 +111,15 @@ At time 4, A, B and C are in the risk set. D is absent because D was censored at
 
 The model specifies:
 
-$$
+```math
 h_i(t)=h_0(t)\exp(\eta_i)
-$$
+```
 
 where $h_0(t)$ is an unspecified baseline hazard and $\eta_i$ is the participant's linear predictor. In an adjusted model:
 
-$$
+```math
 \eta_i=\beta X_i+\gamma_1Z_{i1}+\cdots+\gamma_pZ_{ip}
-$$
+```
 
 The model is semiparametric. Covariate coefficients are estimated parametrically, while the baseline hazard is not assigned a particular distribution.
 
@@ -127,19 +127,19 @@ The model is semiparametric. Covariate coefficients are estimated parametrically
 
 If participant $i$ dies at $t_i$, without tied event times, the participant contributes:
 
-$$
+```math
 \frac{\exp(\eta_i)}
 {\sum_{j\in R(t_i)}\exp(\eta_j)}
-$$
+```
 
 The numerator is the relative hazard score of the person who died. The denominator sums the scores of everyone who could have died then. Multiplying across deaths gives the partial likelihood:
 
-$$
+```math
 L(\boldsymbol\beta)=
 \prod_{i:\delta_i=1}
 \frac{\exp(\eta_i)}
 {\sum_{j\in R(t_i)}\exp(\eta_j)}
-$$
+```
 
 The baseline hazard cancels within each risk-set comparison, allowing the regression coefficients to be estimated without specifying $h_0(t)$.
 
@@ -155,9 +155,9 @@ Assume $\beta=0.20$ and one risk set:
 
 The contribution is:
 
-$$
+```math
 \frac{1.822}{1.822+1.221+1.000}=0.451
-$$
+```
 
 Candidate coefficients generate different contributions over all event times. The fitted coefficients maximize their product, or equivalently the sum of their logarithms.
 
@@ -177,22 +177,22 @@ Convergence means that a numerical solution was found. It does not demonstrate c
 
 Taking logarithms gives:
 
-$$
+```math
 \log h_i(t)=\log h_0(t)+\eta_i
-$$
+```
 
 For two covariate patterns $a$ and $b$:
 
-$$
+```math
 HR(a,b)=\frac{h(t\mid a)}{h(t\mid b)}
 =\exp(\eta(a)-\eta(b))
-$$
+```
 
 The difference $\eta(a)-\eta(b)$ is a contrast on the log-hazard scale. Exponentiating it produces the hazard ratio. If the contrast equals 0.182:
 
-$$
+```math
 HR=\exp(0.182)\approx1.20
-$$
+```
 
 This is a 20% higher hazard, not a 20 percentage-point increase in mortality probability.
 
@@ -202,27 +202,27 @@ CRP typically has a long right tail. Modeling each additional mg/L as equivalent
 
 We define:
 
-$$
+```math
 X_i=\log_2(CRP_i)
-$$
+```
 
 A one-unit increase is a doubling:
 
-$$
+```math
 \log_2(2x)-\log_2(x)=1
-$$
+```
 
 Under a linear effect:
 
-$$
+```math
 h_i(t)=h_0(t)\exp(\beta\log_2(CRP_i)+\boldsymbol\gamma^T\mathbf Z_i)
-$$
+```
 
 the hazard ratio per doubling is:
 
-$$
+```math
 HR_{doubling}=\exp(\beta)
-$$
+```
 
 If $\exp(\beta)=1.20$, each doubling is associated with a 20% higher hazard, conditional on the model and its assumptions.
 
@@ -236,15 +236,15 @@ A spline constructs a smooth function from connected polynomial pieces. Their me
 
 Using basis functions $B_m(X)$:
 
-$$
+```math
 f(X)=\beta_1B_1(X)+\cdots+\beta_qB_q(X)
-$$
+```
 
 The Cox model becomes:
 
-$$
+```math
 h_i(t)=h_0(t)\exp(f\{\log_2(CRP_i)\}+\boldsymbol\gamma^T\mathbf Z_i)
-$$
+```
 
 The cubic pieces have matching value, slope and curvature at every knot. The restriction forces the function to be linear beyond the outer knots, where sparse data would otherwise permit unstable cubic behavior.
 
@@ -254,10 +254,10 @@ The current SAP specification uses four knots at the weighted 5th, 35th, 65th an
 
 Individual spline coefficients are not epidemiological effects. They multiply artificial basis functions and must be combined. For concentrations $x$ and $x_{ref}$:
 
-$$
+```math
 HR(x,x_{ref})=
 \exp[f\{\log_2(x)\}-f\{\log_2(x_{ref})\}]
-$$
+```
 
 If 2 mg/L is the reference and the estimated HR at 8 mg/L is 1.45, the estimated hazard at 8 mg/L is 45% higher than at 2 mg/L, conditional on adjustment variables. It is not a cumulative mortality-risk difference.
 
@@ -280,10 +280,10 @@ Model interpretation must also consider the curve, confidence band, tail informa
 
 For fixed covariate patterns $a$ and $b$:
 
-$$
+```math
 \frac{h(t\mid a)}{h(t\mid b)}
 =\exp(\eta(a)-\eta(b))
-$$
+```
 
 The right-hand side contains no time. The model assumes that the hazard ratio remains constant over follow-up, although absolute hazards may change substantially.
 
@@ -327,13 +327,13 @@ Coefficients are estimated using survey-weighted pseudo-partial likelihood. Desi
 
 The cycle audit confirmed six comparable cycles spanning 12 years. NHANES supplies special four-year MEC weights for 1999–2002, so a single `WTMEC2YR/6` rule is not correct for every cycle. The combined examination weight is:
 
-$$
+```math
 w_{12-year}=
 \begin{cases}
 WTMEC4YR\times\frac{4}{12}, & 1999\text{--}2002\\
 WTMEC2YR\times\frac{2}{12}, & 2003\text{--}2010
 \end{cases}
-$$
+```
 
 Cycle will be included to account for baseline-period differences. These weights target the civilian, noninstitutionalized US adult population represented across the pooled survey period.
 
@@ -343,17 +343,17 @@ The pre-outcome audit found 34 linkage-ineligible participants among 28,924 adul
 
 For a linear CRP term:
 
-$$
+```math
 H_0:\beta=0
-$$
+```
 and:
 
-$$
+```math
 CI_{95\%}=
 \exp[
 \hat{\beta}\pm 1.96\,SE_{\mathrm{design}}(\hat{\beta})
 ]
-$$
+```
 Multi-parameter spline terms will be evaluated with design-based joint Wald tests. Ordinary likelihood-ratio tests are not automatically appropriate for a survey-weighted pseudolikelihood fit.
 
 Inference will emphasize estimates and confidence intervals. A p-value is not the probability that the null hypothesis is true, and statistical significance is not evidence of causation.
