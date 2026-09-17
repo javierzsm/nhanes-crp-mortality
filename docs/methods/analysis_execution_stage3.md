@@ -67,7 +67,9 @@ H_0:
 \beta_{10-15}
 =
 \beta_{15+}.
-[200~With four coefficients, the global test has three numerator degrees of freedom.
+```
+
+With four coefficients, the global test has three numerator degrees of freedom.
 
 Period-specific hazard ratios and confidence intervals describe the magnitude
 of the association within each interval. The global interaction test is used
