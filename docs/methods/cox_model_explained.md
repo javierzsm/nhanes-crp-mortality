@@ -74,7 +74,7 @@ h(t)
 =
 \lim_{\Delta t \to 0}
 \frac{
-  \Pr\left(t \leq T < t+\Delta t \mid T \geq t\right)
+  \Pr(t \leq T < t+\Delta t \mid T \geq t)
 }{
   \Delta t
 }
@@ -90,7 +90,7 @@ $$
 and:
 
 $$
-S(t)=\exp\left(-H(t)\right)
+S(t)=\exp(-H(t))
 $$
 
 A hazard ratio is therefore not interchangeable with a risk ratio, risk difference or ratio of survival probabilities.
@@ -186,7 +186,7 @@ For two covariate patterns $a$ and $b$:
 
 $$
 HR(a,b)=\frac{h(t\mid a)}{h(t\mid b)}
-=\exp\left(\eta(a)-\eta(b)\right)
+=\exp(\eta(a)-\eta(b))
 $$
 
 The difference $\eta(a)-\eta(b)$ is a contrast on the log-hazard scale. Exponentiating it produces the hazard ratio. If the contrast equals 0.182:
@@ -216,7 +216,7 @@ $$
 Under a linear effect:
 
 $$
-h_i(t)=h_0(t)\exp\left(\beta\log_2(CRP_i)+\boldsymbol\gamma^T\mathbf Z_i\right)
+h_i(t)=h_0(t)\exp(\beta\log_2(CRP_i)+\boldsymbol\gamma^T\mathbf Z_i)
 $$
 
 the hazard ratio per doubling is:
@@ -244,7 +244,7 @@ $$
 The Cox model becomes:
 
 $$
-h_i(t)=h_0(t)\exp\left[f\left\{\log_2(CRP_i)\right\}+\boldsymbol\gamma^T\mathbf Z_i\right]
+h_i(t)=h_0(t)\exp(f\{\log_2(CRP_i)\}+\boldsymbol\gamma^T\mathbf Z_i)
 $$
 
 The cubic pieces have matching value, slope and curvature at every knot. The restriction forces the function to be linear beyond the outer knots, where sparse data would otherwise permit unstable cubic behavior.
@@ -257,7 +257,7 @@ Individual spline coefficients are not epidemiological effects. They multiply ar
 
 $$
 HR(x,x_{ref})=
-\exp\left[f\{\log_2(x)\}-f\{\log_2(x_{ref})\}\right]
+\exp[f\{\log_2(x)\}-f\{\log_2(x_{ref})\}]
 $$
 
 If 2 mg/L is the reference and the estimated HR at 8 mg/L is 1.45, the estimated hazard at 8 mg/L is 45% higher than at 2 mg/L, conditional on adjustment variables. It is not a cumulative mortality-risk difference.
@@ -283,7 +283,7 @@ For fixed covariate patterns $a$ and $b$:
 
 $$
 \frac{h(t\mid a)}{h(t\mid b)}
-=\exp\left(\eta(a)-\eta(b)\right)
+=\exp(\eta(a)-\eta(b))
 $$
 
 The right-hand side contains no time. The model assumes that the hazard ratio remains constant over follow-up, although absolute hazards may change substantially.
@@ -352,9 +352,9 @@ and:
 $$
 CI_{95\%}
 =
-\exp\left[
+\exp[
 \hat{\beta}\pm 1.96\,SE_{\mathrm{design}}(\hat{\beta})
-\right]
+]
 $$
 Multi-parameter spline terms will be evaluated with design-based joint Wald tests. Ordinary likelihood-ratio tests are not automatically appropriate for a survey-weighted pseudolikelihood fit.
 
