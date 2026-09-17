@@ -45,6 +45,23 @@ if (nrow(cohort) != analysis_constants$participant_n ||
   stop("Cohort does not match frozen analysis constants.", call. = FALSE)
 }
 
+participant_n <- analysis_constants$participant_n
+death_n <- analysis_constants$death_n
+
+if (!all(c("SDMVSTRA", "SDMVPSU") %in% names(cohort))) {
+  stop(
+    "SDMVSTRA and SDMVPSU are required for survey QC.",
+    call. = FALSE
+  )
+}
+
+survey_strata_n <- length(unique(cohort$SDMVSTRA))
+survey_psu_n <- length(unique(interaction(
+  cohort$SDMVSTRA,
+  cohort$SDMVPSU,
+  drop = TRUE
+)))
+
 cohort <- add_age_spline_basis(cohort, analysis_constants$age_knots)
 cohort$.analysis_row_id <- seq_len(nrow(cohort))
 
@@ -83,6 +100,13 @@ if (n_replicates < 2L) {
   stop("Too few JKn replicates were generated.", call. = FALSE)
 }
 
+jkn_scale <- rep_design$scale
+jkn_rscales <- rep_design$rscales
+jkn_mse <- rep_design$mse
+
+rm(design, rep_design)
+invisible(gc(verbose = FALSE))
+
 # -----------------------------------------------------------------------------
 # 2. Split follow-up into prespecified periods
 # -----------------------------------------------------------------------------
@@ -97,15 +121,48 @@ period_labels <- c(
 
 Surv <- survival::Surv
 
+split_variables <- c(
+  ".analysis_row_id",
+  "follow_up_months",
+  "death",
+  "log2_crp",
+  "age_rcs1",
+  "age_rcs2",
+  "age_rcs3",
+  "sex",
+  "race_hispanic_origin",
+  "cycle",
+  "education",
+  "smoking",
+  "bmi",
+  "diabetes",
+  "hypertension",
+  "prevalent_cvd"
+)
+
+missing_split_variables <- setdiff(split_variables, names(cohort))
+if (length(missing_split_variables) > 0L) {
+  stop(
+    "Missing variables required for the piecewise model: ",
+    paste(missing_split_variables, collapse = ", "),
+    call. = FALSE
+  )
+}
+
+cohort_for_split <- cohort[, split_variables, drop = FALSE]
+
 long_cohort <- survival::survSplit(
   Surv(follow_up_months, death) ~ .,
-  data = cohort,
+  data = cohort_for_split,
   cut = period_cuts_months,
   start = "tstart_months",
   end = "tstop_months",
   event = "death",
   episode = "followup_period_index"
 )
+
+rm(cohort_for_split)
+invisible(gc(verbose = FALSE))
 
 long_cohort$followup_period <- factor(
   long_cohort$followup_period_index,
@@ -116,10 +173,14 @@ long_cohort$followup_period <- factor(
 if (any(long_cohort$tstop_months <= long_cohort$tstart_months)) {
   stop("Non-positive follow-up intervals detected after splitting.", call. = FALSE)
 }
-if (sum(long_cohort$death) != sum(cohort$death)) {
+if (sum(long_cohort$death) != death_n) {
   stop("Death count changed after splitting follow-up.", call. = FALSE)
 }
-if (!all(unique(long_cohort$.analysis_row_id) == cohort$.analysis_row_id)) {
+
+if (!identical(
+  sort(unique(long_cohort$.analysis_row_id)),
+  seq_len(participant_n)
+)) {
   stop("Participant mapping changed after splitting follow-up.", call. = FALSE)
 }
 
@@ -149,7 +210,7 @@ piecewise_formula <- survival::Surv(
 # zero weight are omitted before coxph(). Factor levels are retained because the
 # underlying columns are not droplevelled.
 fit_weighted_cox <- function(participant_weights) {
-  if (length(participant_weights) != nrow(cohort)) {
+  if (length(participant_weights) != participant_n) {
     stop("Weight vector has incorrect length.", call. = FALSE)
   }
 
@@ -160,11 +221,34 @@ fit_weighted_cox <- function(participant_weights) {
     stop("No positive weights in Cox fit.", call. = FALSE)
   }
 
-  analysis_data <- long_cohort[keep, , drop = FALSE]
+  fit_columns <- c(
+    "tstart_months",
+    "tstop_months",
+    "death",
+    crp_period_terms,
+    "age_rcs1",
+    "age_rcs2",
+    "age_rcs3",
+    "sex",
+    "race_hispanic_origin",
+    "cycle",
+    "education",
+    "smoking",
+    "bmi",
+    "diabetes",
+    "hypertension",
+    "prevalent_cvd"
+  )
+
+  analysis_data <- long_cohort[
+    keep,
+    c(fit_columns),
+    drop = FALSE
+  ]
 
   analysis_data$.fit_weight <- row_weights[keep]
-  analysis_data$.fit_weight <- analysis_data$.fit_weight /
-    mean(analysis_data$.fit_weight)
+  analysis_data$.fit_weight <-
+    analysis_data$.fit_weight / mean(analysis_data$.fit_weight)
 
   model <- survival::coxph(
     piecewise_formula,
@@ -177,6 +261,7 @@ fit_weighted_cox <- function(participant_weights) {
   )
 
   coefficients <- stats::coef(model)
+
   if (any(!is.finite(coefficients))) {
     stop("Non-finite Cox coefficients detected.", call. = FALSE)
   }
@@ -306,9 +391,9 @@ if (!all(completed) || any(!is.finite(replicate_coefficients))) {
 
 replicate_variance <- survey::svrVar(
   replicate_coefficients,
-  scale = rep_design$scale,
-  rscales = rep_design$rscales,
-  mse = rep_design$mse,
+  scale = jkn_scale,
+  rscales = jkn_rscales,
+  mse = jkn_mse,
   coef = full_coefficients
 )
 replicate_variance <- as.matrix(replicate_variance)
@@ -416,15 +501,11 @@ period_qc <- merge(
 )
 
 analysis_qc <- data.frame(
-  participants = nrow(cohort),
-  deaths = sum(cohort$death),
+  participants = participant_n,
+  deaths = death_n,
   interval_rows = nrow(long_cohort),
-  survey_strata = length(unique(cohort$SDMVSTRA)),
-  survey_psu_nested = length(unique(interaction(
-    cohort$SDMVSTRA,
-    cohort$SDMVPSU,
-    drop = TRUE
-  ))),
+  survey_strata = survey_strata_n,
+  survey_psu_nested = survey_psu_n,
   survey_design_df = design_df,
   jkn_replicates = n_replicates,
   all_replicates_completed = all(completed),
@@ -465,8 +546,8 @@ write_csv_checked(
 )
 
 message("Piecewise CRP time-interaction analysis completed.")
-message("Participants: ", nrow(cohort))
-message("Deaths: ", sum(cohort$death))
+message("Participants: ", participant_n)
+message("Deaths: ", death_n)
 message("JKn replicates: ", n_replicates)
 message("Design degrees of freedom: ", design_df)
 message(
