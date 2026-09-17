@@ -70,8 +70,7 @@ It is the probability of remaining alive beyond time $t$.
 The hazard is:
 
 $$
-h(t)
-=
+h(t)=
 \lim_{\Delta t \to 0}
 \frac{
   \Pr(t \leq T < t+\Delta t \mid T \geq t)
@@ -350,8 +349,7 @@ $$
 and:
 
 $$
-CI_{95\%}
-=
+CI_{95\%}=
 \exp[
 \hat{\beta}\pm 1.96\,SE_{\mathrm{design}}(\hat{\beta})
 ]

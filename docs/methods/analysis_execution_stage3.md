@@ -60,12 +60,9 @@ period-specific CRP coefficients are equal:
 
 $$
 H_0:
-\beta_{0-5}
-=
-\beta_{5-10}
-=
-\beta_{10-15}
-=
+\beta_{0-5}=
+\beta_{5-10}=
+\beta_{10-15}=
 \beta_{15+}.
 $$
 With four coefficients, the global test has three numerator degrees of freedom.
