@@ -58,7 +58,7 @@ replicate distribution.
 The primary inferential test evaluates the null hypothesis that the four
 period-specific CRP coefficients are equal:
 
-```math
+$$
 H_0:
 \beta_{0-5}
 =
@@ -67,8 +67,7 @@ H_0:
 \beta_{10-15}
 =
 \beta_{15+}.
-```
-
+$$
 With four coefficients, the global test has three numerator degrees of freedom.
 
 Period-specific hazard ratios and confidence intervals describe the magnitude

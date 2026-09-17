@@ -69,7 +69,7 @@ It is the probability of remaining alive beyond time $t$.
 
 The hazard is:
 
-```math
+$$
 h(t)
 =
 \lim_{\Delta t \to 0}
@@ -78,8 +78,7 @@ h(t)
 }{
   \Delta t
 }
-```
-
+$$
 The conditioning is essential. The hazard is the instantaneous death rate among people alive immediately before $t$. It is a rate, not a probability.
 
 The cumulative hazard is:
@@ -345,20 +344,18 @@ The pre-outcome audit found 34 linkage-ineligible participants among 28,924 adul
 
 For a linear CRP term:
 
-```math
+$$
 H_0:\beta=0
-```
-
+$$
 and:
 
-```math
+$$
 CI_{95\%}
 =
 \exp\left[
 \hat{\beta}\pm 1.96\,SE_{\mathrm{design}}(\hat{\beta})
 \right]
-```
-
+$$
 Multi-parameter spline terms will be evaluated with design-based joint Wald tests. Ordinary likelihood-ratio tests are not automatically appropriate for a survey-weighted pseudolikelihood fit.
 
 Inference will emphasize estimates and confidence intervals. A p-value is not the probability that the null hypothesis is true, and statistical significance is not evidence of causation.

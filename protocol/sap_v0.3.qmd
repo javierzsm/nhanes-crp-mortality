@@ -19,16 +19,14 @@ mortality per doubling of baseline CRP. It is not a causal effect.
 
 The two-sided primary hypothesis is:
 
-```math
+$$
 H_0: \beta_{\log_2(CRP)}=0
-```
-
+$$
 against:
 
-```math
+$$
 H_1: \beta_{\log_2(CRP)}\neq0
-```
-
+$$
 with `alpha = 0.05`.
 
 ## Primary analysis
