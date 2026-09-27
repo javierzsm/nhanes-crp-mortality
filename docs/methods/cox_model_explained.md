@@ -419,22 +419,6 @@ Inappropriate:
 
 Software syntax does not define the estimand. Every model term must trace back to the protocol, and every reported contrast must identify the two compared exposure values.
 
-## 24. Exercises
-
-1. A participant is alive when follow-up ends after 132 months. What are the observed time and event indicator?
-2. If $\hat\beta=0.15$ for `log2(CRP)`, calculate the HR for 4 versus 2 mg/L and 8 versus 2 mg/L.
-3. Why is someone censored before a death time absent from that death's risk set?
-4. Why are individual spline coefficients not separately interpretable?
-5. Distinguish the global spline association test from the nonlinearity test.
-
-## 25. Solutions
-
-1. Time is 132 months and the event indicator is 0.
-2. For 4 versus 2 mg/L, $HR=\exp(0.15)=1.162$. For 8 versus 2 mg/L, $HR=\exp(0.30)=1.350$.
-3. After censoring, continued survival is unknown, so the person cannot be confirmed as available to experience the later event.
-4. The coefficients multiply artificial basis functions; interpretation requires their joint value and a contrast between exposure values.
-5. The global test asks whether all CRP terms are jointly zero; the nonlinearity test asks whether nonlinear terms are zero after retaining the linear component.
-
 ## Recommended reading
 
 - Nahhas RW. *Introduction to Regression Methods for Public Health Using R*. Chapters 7 and 8, Survival Analysis and Analyzing Complex Survey Data. https://www.bookdown.org/rwnahhas/RMPH/
