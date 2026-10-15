@@ -12,6 +12,8 @@ The exposure, cycle, mortality-linkage, covariate and final eligibility audits a
 
 The Stage 5 implementation includes four-worker execution, independent reproducible RNG streams, immutable per-chain checkpoints, diagnostic review and survey-Cox/Rubin pooling. Generated participant data, checkpoints, CSVs and figures remain local under the existing `.gitignore`; this repository tracks the code and reports. Authoritative final outputs use the `mi15_20261014_fourworker_v1_v2` prefix; the intermediate v1 comparison is invalid, as documented in the completion report.
 
+For the current handoff, authoritative artifact versions and next steps, see the [project continuity checkpoint](docs/PROJECT_STATUS.md).
+
 ## Preliminary research question
 
 Among US adults aged 20 years or older, is a higher baseline concentration of C-reactive protein associated with subsequent all-cause mortality?
