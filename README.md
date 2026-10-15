@@ -8,6 +8,10 @@ Reproducible cohort study of baseline C-reactive protein and subsequent all-caus
 
 The exposure, cycle, mortality-linkage, covariate and final eligibility audits are complete. No mortality outcome, follow-up distribution or exposure-outcome association was examined before specification freeze. Protocol version 0.3 and statistical analysis plan version 0.3 define the frozen analysis.
 
+**Analysis update — 15 October 2026:** primary and sensitivity analyses have been executed, including the completed 50-imputation missing-covariate sensitivity (Stage 5). The primary complete-case HR per doubling of CRP is 1.130 (95% CI 1.109–1.151); the secondary MI estimate is 1.135 (95% CI 1.115–1.156). These are prognostic associations, with the documented time-variation and missingness-model limitations. See the [Stage 5 completion report](docs/methods/analysis_execution_stage5_completed.md) and [imputation diagnostic decision](docs/methods/analysis_execution_stage5_real_imputation_review_020.md).
+
+The Stage 5 implementation includes four-worker execution, independent reproducible RNG streams, immutable per-chain checkpoints, diagnostic review and survey-Cox/Rubin pooling. Generated participant data, checkpoints, CSVs and figures remain local under the existing `.gitignore`; this repository tracks the code and reports. Authoritative final outputs use the `mi15_20261014_fourworker_v1_v2` prefix; the intermediate v1 comparison is invalid, as documented in the completion report.
+
 ## Preliminary research question
 
 Among US adults aged 20 years or older, is a higher baseline concentration of C-reactive protein associated with subsequent all-cause mortality?
