@@ -1,0 +1,3 @@
+"model","participants","deaths","design_degrees_of_freedom","log_hazard_ratio","standard_error","hazard_ratio","confidence_low","confidence_high","p_value","log_hr_difference_from_primary","hazard_ratio_ratio_to_primary"
+"Primary reference: spline age",26818,5886,91,0.122088307170068,0.00961460814613491,1.12985387157305,1.10876193779426,1.15134703636037,6.04981188678225e-37,0,1
+"Sensitivity: linear age",26818,5886,91,0.118580388676428,0.00938274001584687,1.12589737986428,1.10538153527853,1.14679399784423,1.30093924846354e-36,-0.00350791849363946,0.996498227064301

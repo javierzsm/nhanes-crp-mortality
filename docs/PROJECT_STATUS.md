@@ -1,7 +1,7 @@
 # Project continuity checkpoint
 
-Updated: 15 October 2026. Purpose: leave NHANES ready to resume after work on
-another project. This is the current status; dated execution reports preserve
+Updated: 23 October 2026. Purpose: preserve the current analysis/reporting
+state after resumption. This is the current status; dated execution reports preserve
 what was known when each stage ran.
 
 ## Completed work and authoritative results
@@ -9,7 +9,9 @@ what was known when each stage ran.
 The frozen protocol/SAP v0.3, cohort construction, primary survey-Cox analysis,
 CRP functional-form/time-variation analyses, Stage 4 sensitivities (including
 alternative age specifications) and Stage 5 multiple-imputation sensitivity
-are complete. Stage 4's old statement that MI is pending is historical;
+are complete. On 23 October, SAP reconciliation found previously unimplemented
+sex/age-group interactions and influence diagnostics; these were then completed
+and integrated into the first reporting package. Stage 4's old statement that MI is pending is historical;
 Stage 5 subsequently completed it.
 
 | Analysis | Participants | Deaths | HR per CRP doubling | 95% CI |
@@ -26,6 +28,22 @@ No additional statistical run is needed merely to resume this project.
 These are prognostic associations, not causal effects. Preserve the documented
 CRP PH/time-variation caveat and uncertainty about MAR/conditional model adequacy.
 Do not describe diagnostic acceptance as proof of those assumptions.
+
+## Current reporting materials
+
+- [Stage 6 execution and new secondary results](methods/analysis_execution_stage6_reporting.md).
+- [Working Methods/Results draft](../reports/stage6_v1/manuscript_methods_results.md).
+- [Reporting checklist and remaining author inputs](../reports/stage6_v1/reporting_checklist_working.md).
+- Figures are in `reports/stage6_v1/figures/` as PNG and SVG.
+
+Secondary sex interaction p = 0.284; age-group interaction p = 0.021. These are
+prespecified secondary hypotheses with implementation details recorded before
+those fits, after other study results were known. Interpret alongside existing
+nonlinearity/time variation; they do not replace the primary estimate.
+Eighteen reporting cross-checks passed; original accepted MI/primary outputs
+remain unchanged. The Stage 6 implementation, aggregate reporting package and manuscript draft
+are included in the GitHub update requested after review. Consult Git history
+for the publication commit; generated HTML previews stay local.
 
 ## Read these first when resuming
 
@@ -77,17 +95,16 @@ guard or reset the repository. Review the saved manifests before any genuine
 future re-execution. Changes to hashed study code/specification require a new
 prospective execution plan, not silent reuse of an old plan.
 
-## Next work when returning
+## Next work
 
-The next proposed phase is reporting/manuscript integration:
+The first integrated methods/results draft, aggregate tables, three PNG/SVG
+figures and a working STROBE/RECORD coverage map are now available. Remaining:
 
-1. Consolidate the primary, functional-form, time-variation and sensitivity
-   results into publication tables/figures, using existing validated outputs.
-2. Draft methods/results text, including survey weighting, missingness,
-   imputation/pooling and the distinction between primary and secondary analyses.
-3. Assemble the applicable reporting checklist and discuss limitations, including
-   PH/time variation and assumptions behind the imputation sensitivity.
-4. Review the integrated report before making any new methodological choices.
+1. Write the introduction and literature-based discussion.
+2. Finish measurement/recoding, linkage/data-access and software supplements;
+   consolidate final cohort-flow, baseline and distribution presentations.
+3. Obtain author/affiliation, ethics determination, funding/conflicts and target
+   journal information; do not fill absent declarations by assumption.
+4. Review the manuscript and reporting checklist before submission.
 
-These are proposed next tasks, not claims that manuscript/checklist preparation
-has already been completed. No manuscript work was started during this handoff.
+No new MI run or effect-driven selection is needed for these reporting tasks.

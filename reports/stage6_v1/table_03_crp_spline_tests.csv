@@ -1,0 +1,3 @@
+"test","numerator_df","denominator_df","f_statistic","p_value"
+"Global CRP association",3,65,62.2136950013025,4.41564383422586e-19
+"CRP nonlinearity",2,65,9.16873819370491,0.000310722623959068

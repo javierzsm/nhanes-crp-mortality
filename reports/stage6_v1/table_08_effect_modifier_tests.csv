@@ -1,0 +1,3 @@
+"modifier","test","numerator_df","denominator_df","f_statistic","p_value"
+"sex","CRP by sex",1,66,1.16743136081226,0.283862125045434
+"age_group","CRP by age_group",1,65,5.5754685575007,0.021221727098711

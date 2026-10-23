@@ -1,0 +1,12 @@
+"variable","role","type","missing_n","observed_n","observed_levels","missing_pct"
+"age","primary adjustment","numeric",0,27755,,0
+"sex","primary adjustment","factor",0,27755,"Male | Female",0
+"race_hispanic_origin","primary adjustment","factor",0,27755,"Mexican American | Other Hispanic | Non-Hispanic White | Non-Hispanic Black | Other or multiracial",0
+"education","primary adjustment","factor",48,27707,"Less than 9th grade | 9th-11th grade | High school graduate or GED | Some college or AA degree | College graduate or above",0.172941812286075
+"smoking","primary adjustment","factor",31,27724,"never | former | current",0.111691587101423
+"bmi","primary adjustment","numeric",575,27180,,2.07169879301027
+"diabetes","primary adjustment","factor",19,27736,"No | Borderline | Yes",0.0684561340299045
+"hypertension","primary adjustment","factor",164,27591,"No | Yes",0.590884525310755
+"prevalent_cvd","primary adjustment","factor",147,27608,"No | Yes",0.529634300126103
+"cycle","primary adjustment","factor",0,27755,"1999-2000 | 2001-2002 | 2003-2004 | 2005-2006 | 2007-2008 | 2009-2010",0
+"income_poverty_ratio","additional income sensitivity","numeric",2244,25511,,8.08502972437399

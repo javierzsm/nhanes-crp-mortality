@@ -14,6 +14,8 @@ The Stage 5 implementation includes four-worker execution, independent reproduci
 
 For the current handoff, authoritative artifact versions and next steps, see the [project continuity checkpoint](docs/PROJECT_STATUS.md).
 
+**Reporting update — 23 October 2026:** SAP-prespecified sex/age-group interactions and descriptive influence diagnostics have now been completed after reconciliation. A [working Methods/Results draft](reports/stage6_v1/manuscript_methods_results.md), draft figures and a [reporting checklist](reports/stage6_v1/reporting_checklist_working.md) are available. See the [Stage 6 report](docs/methods/analysis_execution_stage6_reporting.md) for results, validation and remaining publication tasks.
+
 ## Preliminary research question
 
 Among US adults aged 20 years or older, is a higher baseline concentration of C-reactive protein associated with subsequent all-cause mortality?

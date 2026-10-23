@@ -1,0 +1,2 @@
+"m","n","deaths","iterations","beta","se","within_variance","between_variance","total_variance","dfcom","df","lambda","relative_variance_increase","fmi","HR","CI_lower","CI_upper","p","inference"
+50,27755,6354,20,0.126956936985662,0.00907273871644665,8.19973386655202e-05,3.11028579793973e-07,8.231458781691e-05,91,88.7181822439561,0.00385410605584881,0.00386901766024335,0.0255759908462507,1.13536812435493,1.11508296401381,1.15602230452986,3.58903633694459e-24,"Barnard-Rubin t interval; survey dfcom=91"

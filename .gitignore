@@ -16,3 +16,7 @@ protocol/*_files/
 !data/processed/.gitkeep
 !output/figures/.gitkeep
 !output/tables/.gitkeep
+
+# Rendered manuscript previews (keep Markdown, aggregate tables and figures)
+reports/**/*.html
+reports/**/*_files/
