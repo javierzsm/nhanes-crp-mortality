@@ -1,0 +1,15 @@
+"check","passed"
+"previous_artifacts_intact_before",TRUE
+"four_eligible_same_month_deaths",TRUE
+"primary_cohort_counts",TRUE
+"two_same_month_deaths_in_complete_cases",TRUE
+"other_two_ineligible_for_complete_cases",TRUE
+"primary_formula_unchanged",TRUE
+"all_primary_coefficients_reproduced",TRUE
+"primary_covariance_reproduced",TRUE
+"only_requested_rows_removed",TRUE
+"positive_exposure_variance",TRUE
+"remaining_sample_counts",TRUE
+"confidence_interval_independent_check",TRUE
+"inputs_unchanged",TRUE
+"previous_artifacts_intact_after",TRUE

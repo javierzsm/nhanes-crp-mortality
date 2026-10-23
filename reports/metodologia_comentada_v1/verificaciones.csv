@@ -1,0 +1,17 @@
+"check","passed"
+"primary_HR_and_interval",TRUE
+"Rubin_Qbar",TRUE
+"Rubin_within",TRUE
+"Rubin_between",TRUE
+"Rubin_total",TRUE
+"finite_MI_interval",TRUE
+"Nelson_Aalen_tie_example",TRUE
+"age_knots",TRUE
+"CRP_knots_back_transform",TRUE
+"984_missing_cells",TRUE
+"actual_MICE_version",TRUE
+"positivity_filter_membership_equivalent",TRUE
+"accepted_checkpoints_unchanged",TRUE
+"Stage5_outputs_unchanged",TRUE
+"original_manuscript_and_Stage6_unchanged",TRUE
+"four_event_sensitivity_explicitly_pending",TRUE

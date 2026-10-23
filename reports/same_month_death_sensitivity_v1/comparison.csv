@@ -1,0 +1,3 @@
+"model","term","log_hazard_ratio","standard_error","hazard_ratio","confidence_low","confidence_high","p_value","participants","deaths","design_df","log_hr_difference","hr_ratio_to_primary"
+"Primary reference","log2_crp",0.122088307170068,0.00961460814613491,1.12985387157305,1.10876193779426,1.15134703636037,6.04981188678225e-37,26818,5886,91,0,1
+"Exclude same-month deaths","log2_crp",0.121891817144128,0.0096000719936237,1.12963188836597,1.10857568177774,1.15108803502431,6.14643620118947e-37,26816,5884,91,-0.00019649002593991,0.999803529276961

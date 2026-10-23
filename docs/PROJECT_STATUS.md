@@ -32,7 +32,8 @@ Do not describe diagnostic acceptance as proof of those assumptions.
 ## Current reporting materials
 
 - [Stage 6 execution and new secondary results](methods/analysis_execution_stage6_reporting.md).
-- [Working Methods/Results draft](../reports/stage6_v1/manuscript_methods_results.md).
+- Current manuscript v0.2 incorporates the Amendment 001 sensitivity; v0.1 is preserved.
+- [Working Methods/Results draft](../reports/stage6_v2/manuscript_methods_results.md).
 - [Reporting checklist and remaining author inputs](../reports/stage6_v1/reporting_checklist_working.md).
 - Figures are in `reports/stage6_v1/figures/` as PNG and SVG.
 
@@ -44,6 +45,24 @@ Eighteen reporting cross-checks passed; original accepted MI/primary outputs
 remain unchanged. The Stage 6 implementation, aggregate reporting package and manuscript draft
 are included in the GitHub update requested after review. Consult Git history
 for the publication commit; generated HTML previews stay local.
+
+## Methodological reading companion and newly identified issue
+
+A separate [Spanish methodological manuscript](../reports/metodologia_comentada_v1/manuscrito_metodologico_es.md)
+now explains the rationale, alternatives, mathematics and limitations in depth.
+Its local HTML has a navigable index and embedded native mathematics; sixteen
+numerical checks passed and original Stage 5/6 artifacts remain unchanged.
+
+Reading Amendment 001 identified a remaining sensitivity commitment, now closed
+on 23 October 2026 in the [same-month-death addendum](../reports/same_month_death_sensitivity_v1/README.md).
+There are four affected eligible participants, but only two are complete cases;
+the other two were already absent from the primary model. Excluding the two
+applicable deaths gives N=26,816, deaths=5,884 and HR=1.129632
+(95% CI 1.108576–1.151088), versus primary HR=1.129854. Fourteen checks passed,
+including reproduction of all primary coefficients/covariance and preservation
+of original Stage 5/6 and methodological-companion artifacts. The original
+companion records the historical discovery; the dated addendum supersedes its
+pending status. No MI rerun was required; its accepted result is unchanged.
 
 ## Read these first when resuming
 

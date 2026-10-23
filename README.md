@@ -14,7 +14,9 @@ The Stage 5 implementation includes four-worker execution, independent reproduci
 
 For the current handoff, authoritative artifact versions and next steps, see the [project continuity checkpoint](docs/PROJECT_STATUS.md).
 
-**Reporting update — 23 October 2026:** SAP-prespecified sex/age-group interactions and descriptive influence diagnostics have now been completed after reconciliation. A [working Methods/Results draft](reports/stage6_v1/manuscript_methods_results.md), draft figures and a [reporting checklist](reports/stage6_v1/reporting_checklist_working.md) are available. See the [Stage 6 report](docs/methods/analysis_execution_stage6_reporting.md) for results, validation and remaining publication tasks.
+**Reporting update — 23 October 2026:** SAP-prespecified sex/age-group interactions and descriptive influence diagnostics have now been completed after reconciliation. A [working Methods/Results draft](reports/stage6_v2/manuscript_methods_results.md), draft figures and a [reporting checklist](reports/stage6_v1/reporting_checklist_working.md) are available. See the [Stage 6 report](docs/methods/analysis_execution_stage6_reporting.md) for results, validation and remaining publication tasks.
+
+For a detailed Spanish explanation of the statistical rationale, equations, alternatives and limitations, see the [commented methodological manuscript](reports/metodologia_comentada_v1/manuscrito_metodologico_es.md). The Amendment 001 sensitivity it identified as pending is now completed in a separate [same-month-death sensitivity addendum](reports/same_month_death_sensitivity_v1/README.md).
 
 ## Preliminary research question
 
