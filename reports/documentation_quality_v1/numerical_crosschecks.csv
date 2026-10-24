@@ -1,0 +1,14 @@
+"check","passed"
+"fifty_saved_imputation_estimates",TRUE
+"Rubin_mean",TRUE
+"Rubin_within",TRUE
+"Rubin_between",TRUE
+"Rubin_total",TRUE
+"independent_pool_total",TRUE
+"independent_pool_df",TRUE
+"primary_HR_interval",TRUE
+"English_primary_coefficient",TRUE
+"English_MI_coefficient",TRUE
+"English_Rubin_total",TRUE
+"English_same_month_result",TRUE
+"thirty_four_main_sections",TRUE

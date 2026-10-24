@@ -1,0 +1,15 @@
+path,width,equations,zero_boxes,math_errors,overflow_equations,clipped_equations,font,language,passed
+docs/methods/analysis_execution_stage3.md,1440,1,0,0,0,0,math,en,True
+docs/methods/analysis_execution_stage3.md,480,1,0,0,0,0,math,en,True
+docs/methods/analysis_execution_stage4.md,1440,2,0,0,0,0,math,en,True
+docs/methods/analysis_execution_stage4.md,480,2,0,0,0,0,math,en,True
+docs/methods/cox_model_explained.md,1440,55,0,0,0,0,math,en,True
+docs/methods/cox_model_explained.md,480,55,0,0,0,0,math,en,True
+docs/methods/multiple_imputation_technical_spec_draft.md,1440,2,0,0,0,0,math,en,True
+docs/methods/multiple_imputation_technical_spec_draft.md,480,2,0,0,2,0,math,en,True
+protocol/sap_v0.3.qmd,1440,2,0,0,0,0,math,en,True
+protocol/sap_v0.3.qmd,480,2,0,0,0,0,math,en,True
+reports/metodologia_comentada_v1/manuscrito_metodologico_es.md,1440,156,0,0,0,0,math,en,True
+reports/metodologia_comentada_v1/manuscrito_metodologico_es.md,480,156,0,0,4,0,math,en,True
+reports/same_month_death_sensitivity_v1/README.md,1440,1,0,0,0,0,math,en,True
+reports/same_month_death_sensitivity_v1/README.md,480,1,0,0,0,0,math,en,True

@@ -20,3 +20,11 @@ protocol/*_files/
 # Rendered manuscript previews (keep Markdown, aggregate tables and figures)
 reports/**/*.html
 reports/**/*_files/
+
+# Local documentation preview and browser QA artifacts
+output/documentation_preview/
+
+**/.quarto/
+**/*.quarto_ipynb
+
+__pycache__/

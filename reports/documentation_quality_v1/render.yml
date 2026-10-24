@@ -1,0 +1,18 @@
+lang: en
+format:
+  html:
+    theme: default
+    toc: true
+    toc-depth: 2
+    embed-resources: true
+    html-math-method: mathml
+    fontsize: 18px
+    linestretch: 1.6
+execute:
+  enabled: false
+include-in-header:
+  - text: |
+      <style>
+      .math.display { display: block; max-width: 100%; overflow-x: auto; padding: .3em 0; }
+      .math.display math { max-width: none; }
+      </style>

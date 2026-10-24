@@ -1,6 +1,6 @@
 # Project continuity checkpoint
 
-Updated: 23 October 2026. Purpose: preserve the current analysis/reporting
+Updated: 24 October 2026. Purpose: preserve the current analysis/reporting
 state after resumption. This is the current status; dated execution reports preserve
 what was known when each stage ran.
 
@@ -32,10 +32,15 @@ Do not describe diagnostic acceptance as proof of those assumptions.
 ## Current reporting materials
 
 - [Stage 6 execution and new secondary results](methods/analysis_execution_stage6_reporting.md).
-- Current manuscript v0.2 incorporates the Amendment 001 sensitivity; v0.1 is preserved.
-- [Working Methods/Results draft](../reports/stage6_v2/manuscript_methods_results.md).
+- Current manuscript v0.3 integrates cohort flow, the CRP spline with weighted
+  exposure distribution, and follow-up-period HRs. Versions v0.1/v0.2 are preserved.
+- [Supplementary figures](../reports/stage6_v3/supplementary_figures.md) contain
+  the updated sensitivity forest and secondary interaction contrasts.
+- Local standalone HTML reading copies are beside the v0.3 Markdown sources.
+- [Working Methods/Results draft](../reports/stage6_v3/manuscript_methods_results.md).
 - [Reporting checklist and remaining author inputs](../reports/stage6_v1/reporting_checklist_working.md).
-- Figures are in `reports/stage6_v1/figures/` as PNG and SVG.
+- Current figures are in `reports/stage6_v3/figures/` as SVG and 240-dpi PNG,
+  with aggregate source tables in `figure_data/`. Older figures remain in v0.1.
 
 Secondary sex interaction p = 0.284; age-group interaction p = 0.021. These are
 prespecified secondary hypotheses with implementation details recorded before
@@ -48,10 +53,14 @@ for the publication commit; generated HTML previews stay local.
 
 ## Methodological reading companion and newly identified issue
 
-A separate [Spanish methodological manuscript](../reports/metodologia_comentada_v1/manuscrito_metodologico_es.md)
+A separate [English methodological manuscript](../reports/metodologia_comentada_v1/manuscrito_metodologico_es.md)
 now explains the rationale, alternatives, mathematics and limitations in depth.
-Its local HTML has a navigable index and embedded native mathematics; sixteen
-numerical checks passed and original Stage 5/6 artifacts remain unchanged.
+Its local HTML has a navigable index and embedded native mathematics. The original
+sixteen numerical checks describe the 23 October source; the 24 October English
+and equation-rendering revision is recorded separately in the
+[documentation audit](../reports/documentation_quality_v1/README.md). Participant
+data, checkpoints and fitted estimates remain unchanged. Historical source-hash
+checks must be interpreted against their recorded documentation versions.
 
 Reading Amendment 001 identified a remaining sensitivity commitment, now closed
 on 23 October 2026 in the [same-month-death addendum](../reports/same_month_death_sensitivity_v1/README.md).
@@ -113,6 +122,16 @@ to refresh timestamps, overwrite historical results, modify hashes to bypass a
 guard or reset the repository. Review the saved manifests before any genuine
 future re-execution. Changes to hashed study code/specification require a new
 prospective execution plan, not silent reuse of an old plan.
+
+## Documentation language and rendering
+
+All maintained documentation is now English. Equation code fences have been
+converted to display-math delimiters where needed, and the companion uses English
+labels and decimal points. This is a presentation revision, not a statistical
+specification change or a new analysis. Historical manifests remain intact; the
+new audit identifies expected documentation hash differences. Do not edit an old
+execution manifest or rerun completed analysis scripts to make those differences
+disappear. Use the recorded Git version when verifying historical sources.
 
 ## Next work
 

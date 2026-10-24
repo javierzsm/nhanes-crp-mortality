@@ -109,11 +109,11 @@ Use the event indicator `death` and a **pooled, unweighted marginal Nelson–Aal
 
 For distinct event times, define:
 
-```math
+$$
 d_j = \sum_i I(T_i=t_j, D_i=1),\qquad
 Y_j = \sum_i I(T_i\ge t_j),\qquad
 \widehat H_{NA}(T_i)=\sum_{t_j\le T_i} d_j/Y_j.
-```
+$$
 
 Include events and censors tied at an event time in its risk set immediately before that time. Aggregate all tied deaths into a single increment. Evaluate the right-continuous step function, including an increment when follow-up equals its event time; assign zero before the first event. Require positive risk sets, finite nonnegative monotone hazards, event-count reconciliation and no missing auxiliary values. Synthetic unit examples must cover tied deaths/censors, pre-event censoring, the last event and 0.5-month follow-up. Use sorted times and cumulative risk counts rather than a participant-by-event-time matrix.
 
@@ -197,10 +197,10 @@ Only after specification acceptance, final synthetic QC and real-imputation diag
 
 Manual scalar Rubin pooling remains:
 
-```math
+$$
 \bar Q = m^{-1}\sum Q_k,\quad \bar U=m^{-1}\sum U_k,\quad
 B=\operatorname{var}(Q_k),\quad T=\bar U+(1+1/m)B.
-```
+$$
 
 For the proposed interval convention, use finite-sample Barnard–Rubin degrees of freedom with complete-data df equal to `survey::degf()` of the eligible design, checked consistently across imputations. This is an explicit conservative inference convention for this sensitivity, not the primary model's asymptotic Wald convention. Do not substitute participant N as the survey df or assert exact coverage. With `lambda = (1 + 1/m) B/T`, define `df_old = (m − 1)/lambda^2`, `df_obs = ((df_com + 1)/(df_com + 3)) df_com (1 − lambda)` and `df = 1/(1/df_old + 1/df_obs)`, using `df_old = Inf` when B = 0. Validate these calculations independently before use. Report the t-based interval, pooled SE, HR, within/between/total variance, lambda, relative variance increase and finite-df FMI `(r + 2/(df + 3))/(r + 1)`, where `r = (1 + 1/m) B/Ubar`. FMI is not the percentage of records missing.
 

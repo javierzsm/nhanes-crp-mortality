@@ -1,59 +1,62 @@
-# Sensibilidad de la enmienda 001: fallecimientos del mismo mes
+# Amendment 001 sensitivity: same-month deaths
 
-Fecha de ejecución: 23 de octubre de 2026. Análisis adicional del modelo principal
-de casos completos, previsto por la [enmienda 001](../../protocol/amendments/001_zero_followup_time.qmd).
+Executed on 23 October 2026; English documentation revision on 24 October 2026.
+This additional analysis of the primary complete-case model was specified by
+[Amendment 001](../../protocol/amendments/001_zero_followup_time.qmd).
 
-## Pregunta y decisión
+## Question and decision
 
-¿Depende la asociación estimada entre PCR y mortalidad de asignar 0,5 meses a
-los fallecimientos cuyo seguimiento público es de cero meses?
+Does assigning 0.5 months to deaths with zero released follow-up affect the
+estimated CRP–mortality association?
 
-La sensibilidad muestra una influencia muy pequeña sobre la estimación puntual
-y su intervalo. Se conserva el análisis principal con la convención de 0,5 meses;
-este resultado adicional cierra el compromiso específico de la enmienda. No
-constituye una prueba formal de equivalencia ni valida todos los demás supuestos
-del estudio.
+The sensitivity has very little influence on the point estimate or interval.
+The primary analysis retains the 0.5-month convention; this additional result
+closes the specific amendment commitment. It is neither a formal equivalence
+test nor validation of all other study assumptions.
 
-## Qué se excluyó realmente
+## What was actually excluded?
 
-Hay cuatro fallecimientos del mismo mes en los 27.755 participantes elegibles.
-Dos de ellos, ambos de 2007–2008, ya estaban excluidos del modelo principal por
-datos incompletos. Por tanto, excluir los cuatro de la población elegible y
-aplicar los mismos requisitos de casos completos elimina **dos observaciones
-adicionales** del modelo: una de 2001–2002 y otra de 2003–2004. Las cuatro tienen
-seguimiento publicado de cero meses y seguimiento analítico de 0,5 meses.
-El [recuento por ciclo](exclusion_audit.csv) documenta esta distinción sin
-publicar identificadores individuales.
+There are four same-month deaths among 27,755 eligible participants. Two, both
+from 2007–2008, were already absent from the primary model because of incomplete
+covariates. Excluding all four from the eligible population while retaining the
+same complete-case requirements therefore removes **two additional observations**
+from the model: one from 2001–2002 and one from 2003–2004. All four have zero
+released months and 0.5 analytic months. The [cycle counts](exclusion_audit.csv)
+document this distinction without publishing individual identifiers.
 
-## Método
+## Method
 
-Se reprodujo primero el modelo guardado, verificando todos sus coeficientes y
-la matriz de covarianza con tolerancia numérica de 1e-10. Luego se ajustó la
-misma fórmula de Cox con empates Efron, exposición log2(PCR), los mismos ajustes
-y las mismas bases de edad calculadas con los nudos originales 22, 38, 52 y 78.
-Se excluyeron únicamente los casos indicados mediante un subconjunto del diseño
-de encuesta original, conservando ponderaciones, estratos y conglomerados. Los
-grados de libertad del diseño permanecieron en 91.
+First, the saved primary model was reproduced, checking all coefficients and
+the covariance matrix at numerical tolerance 1e-10. The same Cox formula was
+then fitted with Efron ties, log2(CRP), the original adjustments, and the same
+age bases from knots 22, 38, 52, and 78. Only the specified records were removed
+by subsetting the original survey design, preserving weights, strata, and
+clusters. Design degrees of freedom remained 91.
 
-Los intervalos usan la varianza del diseño y la aproximación normal del análisis
-principal: exp(beta ± 1,959964 × SE). No se recalcularon nudos, no se imputaron
-datos y no se seleccionaron especificaciones en función del resultado.
+Intervals use design variance and the primary normal approximation:
 
-## Resultados
+$$
+\mathrm{CI}_{95\%}=\exp\{\widehat\beta\pm1.959964\,SE\}.
+$$
 
-| Análisis | Participantes | Fallecimientos | HR por duplicación de PCR | IC del 95 % |
-|---|---:|---:|---:|---:|
-| Principal | 26.818 | 5.886 | 1,129854 | 1,108762–1,151347 |
-| Exclusión de fallecimientos del mismo mes | 26.816 | 5.884 | 1,129632 | 1,108576–1,151088 |
+Knots were not recalculated, data were not imputed, and specifications were not
+selected based on results.
 
-El coeficiente logarítmico cambia de 0,1220883072 a 0,1218918171:
-diferencia −0,0001964900. La razón entre ambos HR es 0,9998035293, una
-reducción relativa del HR de aproximadamente **0,01965 %**. El exceso relativo
-de hazard pasa de 12,9854 % a 12,9632 %: diferencia de −0,02220 puntos
-porcentuales. Estas cantidades describen hazard, no riesgo acumulado ni un
-efecto causal. No se fijó retrospectivamente un umbral de equivalencia.
+## Results
 
-## Texto adicional para el manuscrito científico
+| Analysis | Participants | Deaths | HR per CRP doubling | 95% CI |
+| --- | ---: | ---: | ---: | ---: |
+| Primary | 26,818 | 5,886 | 1.129854 | 1.108762–1.151347 |
+| Exclude same-month deaths | 26,816 | 5,884 | 1.129632 | 1.108576–1.151088 |
+
+The log coefficient changes from 0.1220883072 to 0.1218918171, a difference
+of −0.0001964900. The ratio of HRs is 0.9998035293, a relative HR reduction
+of approximately **0.01965%**. Excess relative hazard changes from 12.9854%
+to 12.9632%, a −0.02220-percentage-point difference. These describe hazard,
+not cumulative risk or a causal effect. No equivalence threshold was chosen
+retrospectively.
+
+## Additional scientific manuscript text
 
 **Methods.** As specified in Amendment 001, we repeated the primary
 complete-case survey-weighted Cox analysis after excluding participants whose
@@ -70,24 +73,24 @@ was 1.129632 (95% CI 1.108576–1.151088), compared with 1.129854
 the hazard ratio was −0.01965%, indicating little influence of the midpoint
 convention on this estimate.
 
-## Verificación y trazabilidad
+## Verification and provenance
 
-Las [14 verificaciones](validation.csv) pasaron. Incluyen los recuentos,
-la identidad de las filas retenidas, la reproducción del modelo principal,
-la comprobación independiente del intervalo y la integridad antes/después
-de los resultados anteriores. Los [resultados completos](comparison.csv) y
-los [hashes de las fuentes](inputs.csv) permiten auditar el análisis.
+All [fourteen checks](validation.csv) passed at execution. They cover counts,
+retained rows, reproduction of the primary model, an independent interval
+calculation, and before/after integrity of earlier artifacts. The
+[full results](comparison.csv) and [input hashes](inputs.csv) support audit.
+These checks refer to the source versions at execution. Later English and
+rendering changes are disclosed in the [documentation audit](../documentation_quality_v1/README.md);
+old manifests were not rewritten to disguise documentation changes.
 
-Código: [22_sensitivity_same_month_deaths.R](../../src/R/22_sensitivity_same_month_deaths.R).
-Ejecución desde la raíz: `Rscript src/R/22_sensitivity_same_month_deaths.R`.
-El script detiene la ejecución si ya existen las salidas de esta versión;
-no debe repetirse para actualizar fechas. Los coeficientes, la covarianza y el
-manifiesto local están en `data/processed/same_month_death_sensitivity_v1.rds`.
-Los CSV contienen únicamente resultados agregados.
+Code: [22_sensitivity_same_month_deaths.R](../../src/R/22_sensitivity_same_month_deaths.R).
+Run from the root using `Rscript src/R/22_sensitivity_same_month_deaths.R`.
+It stops if this version's outputs already exist; do not rerun to refresh dates.
+Coefficients, covariance, and the local manifest are stored in
+`data/processed/same_month_death_sensitivity_v1.rds`. CSVs contain aggregates only.
 
-Este anexo actualiza el estado pendiente señalado en el
-[manuscrito metodológico comentado](../metodologia_comentada_v1/manuscrito_metodologico_es.md)
-y complementa el [borrador científico](../stage6_v1/manuscript_methods_results.md).
-Ambos documentos anteriores y los resultados de imputación se conservaron
-sin modificaciones. No se afirma haber repetido aquí el modelo imputado ni
-las demás sensibilidades: la enmienda se evalúa sobre el modelo principal.
+This addendum updates the issue identified in the
+[commented methodological manuscript](../metodologia_comentada_v1/manuscrito_metodologico_es.md)
+and is incorporated into the [current scientific draft](../stage6_v2/manuscript_methods_results.md).
+It evaluates the primary model, without claiming to repeat the imputed model
+or all other sensitivities. Participant data and fitted results are unchanged.

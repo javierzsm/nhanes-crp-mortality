@@ -36,13 +36,13 @@ Two additional SAP sensitivities are not implemented in Script 10:
 All survey-weighted sensitivity analyses use the same primary Cox model
 specification as Script 06:
 
-```math
+$$
 h_i(t)=h_0(t)\exp\{
 \beta_{CRP}\log_2(CRP_i)
 +f(age_i)
 +\boldsymbol{\gamma}^{T}\mathbf{Z}_i
 \}.
-```
+$$
 
 The adjustment set is unchanged:
 
@@ -198,11 +198,11 @@ freedom.
 
 The primary reference estimate was:
 
-```math
+$$
 HR=1.1299
 \quad
 (95\%\ CI\ 1.1088\text{ to }1.1513).
-```
+$$
 
 Sensitivity estimates were:
 
