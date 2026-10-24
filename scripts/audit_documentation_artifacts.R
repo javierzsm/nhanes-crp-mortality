@@ -1,7 +1,8 @@
 #!/usr/bin/env Rscript
 # Read-only comparison with recorded historical hashes; never rewrite a manifest.
 source('src/R/00_functions_imputation_execution.R')
-out <- 'reports/documentation_quality_v1'
+args <- commandArgs(trailingOnly=TRUE)
+out <- if(length(args)) args[1] else 'reports/documentation_quality_v1'
 spec <- list(
  list('data/processed/mi14_20261014_fourworker_v1/accepted_endpoint_020.rds','checkpoint_hashes'),
  list('data/processed/mi14_20261014_fourworker_v1/plan.rds','manifest.hashes'),
@@ -32,7 +33,9 @@ write.csv(a,file.path(out,'archived_specification_check.csv'),row.names=FALSE)
 cat(sum(!doc),' non-document artifact references unchanged; ',
  sum(!rows$unchanged[doc]),' historical documentation differences disclosed.\n',sep='')
 # Check numerical notation against saved coefficient/variance inputs, without fits.
-text <- paste(readLines('reports/metodologia_comentada_v1/manuscrito_metodologico_es.md'),collapse='\n')
+personal_path <- 'reports/metodologia_comentada_v1/manuscrito_metodologico_es.md'
+has_personal_text <- file.exists(personal_path)
+text <- if(has_personal_text) paste(readLines(personal_path),collapse='\n') else ''
 q <- read.csv('output/tables/mi15_20261014_fourworker_v1_v2_per_imputation.csv')
 p <- read.csv('output/tables/mi15_20261014_fourworker_v1_v2_pooled.csv')
 cc <- read.csv('output/tables/table_02_primary_crp_hazard_ratios.csv')
@@ -52,6 +55,7 @@ numeric_checks <- data.frame(check=c('fifty_saved_imputation_estimates','Rubin_m
  grepl('8.23145878169100',text,fixed=TRUE),
  all(vapply(c('1.129632','1.108576–1.151088','−0.01965%'),grepl,logical(1),x=text,fixed=TRUE)),
  sum(grepl('^## ',strsplit(text,'\n',fixed=TRUE)[[1]]))==34L))
+if(!has_personal_text) numeric_checks <- numeric_checks[!numeric_checks$check %in% c('English_primary_coefficient','English_MI_coefficient','English_Rubin_total','English_same_month_result','thirty_four_main_sections'),]
 stopifnot(all(numeric_checks$passed))
 write.csv(numeric_checks,file.path(out,'numerical_crosschecks.csv'),row.names=FALSE)
 cat(nrow(numeric_checks),'numerical/text cross-checks passed.\n')

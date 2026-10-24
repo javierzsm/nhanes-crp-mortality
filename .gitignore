@@ -28,3 +28,7 @@ output/documentation_preview/
 **/*.quarto_ipynb
 
 __pycache__/
+
+# Personal study notes: keep locally, exclude from publication
+/reports/metodologia_comentada_v1/
+/src/R/21_validate_methodological_manuscript.R

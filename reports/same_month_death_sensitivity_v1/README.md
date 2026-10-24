@@ -36,7 +36,7 @@ clusters. Design degrees of freedom remained 91.
 Intervals use design variance and the primary normal approximation:
 
 $$
-\mathrm{CI}_{95\%}=\exp\{\widehat\beta\pm1.959964\,SE\}.
+\mathrm{CI}_{0.95}=\exp\lbrace \widehat\beta\pm1.959964\,SE\rbrace .
 $$
 
 Knots were not recalculated, data were not imputed, and specifications were not
@@ -89,8 +89,6 @@ It stops if this version's outputs already exist; do not rerun to refresh dates.
 Coefficients, covariance, and the local manifest are stored in
 `data/processed/same_month_death_sensitivity_v1.rds`. CSVs contain aggregates only.
 
-This addendum updates the issue identified in the
-[commented methodological manuscript](../metodologia_comentada_v1/manuscrito_metodologico_es.md)
-and is incorporated into the [current scientific draft](../stage6_v2/manuscript_methods_results.md).
+This addendum is incorporated into the [current scientific draft](../stage6_v3/manuscript_methods_results.md).
 It evaluates the primary model, without claiming to repeat the imputed model
 or all other sensitivities. Participant data and fitted results are unchanged.

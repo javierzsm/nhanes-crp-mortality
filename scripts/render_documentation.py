@@ -21,9 +21,12 @@ BUILD = ROOT / 'output/documentation_preview'
 
 
 def documents():
-    return sorted([ROOT / 'README.md', *ROOT.glob('docs/**/*.md'),
-                   *ROOT.glob('reports/**/*.md'), *ROOT.glob('protocol/**/*.md'),
-                   *ROOT.glob('protocol/**/*.qmd')])
+    candidates = sorted([ROOT / 'README.md', *ROOT.glob('docs/**/*.md'),
+                         *ROOT.glob('reports/**/*.md'), *ROOT.glob('protocol/**/*.md'),
+                         *ROOT.glob('protocol/**/*.qmd')])
+    # Personal ignored notes must never enter public rendering reports or indexes.
+    return [p for p in candidates if subprocess.run(
+        ['git','check-ignore','--no-index','--quiet',str(p)],cwd=ROOT).returncode != 0]
 
 
 def save_csv(path, rows):

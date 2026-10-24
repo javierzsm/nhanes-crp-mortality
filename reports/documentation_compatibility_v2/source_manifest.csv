@@ -1,0 +1,8 @@
+path,md5
+README.md,b2be565b2d7b9c0b2a63fdf036343719
+docs/PROJECT_STATUS.md,fbf634e96299e8a3448a7f0a153c8eb4
+docs/methods/analysis_execution_stage4.md,9f0256c7376b6d53b5f7a284d5470a69
+docs/methods/cox_model_explained.md,ea6cd742a1a271e8c708c24ed794d69e
+reports/same_month_death_sensitivity_v1/README.md,fd811f0441c936bcc893c45c7c2982a3
+scripts/render_documentation.py,40dabb16d38c239e2e8d640ab477e95e
+scripts/audit_documentation_artifacts.R,b85d9db66b920b1a8a38b07101282581

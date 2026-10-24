@@ -1,0 +1,12 @@
+"manifest","field","path","recorded_md5","current_md5","unchanged"
+"data/processed/mi14_20261014_fourworker_v1/plan.rds","manifest.hashes","docs/methods/multiple_imputation_technical_spec_draft.md","82482a33fb629b748419278f2ed3d80c","2eca0abf75165e08a71c38d9d31e10d1",FALSE
+"data/processed/mi15_20261014_fourworker_v1_v2/phase_complete.rds","hashes","docs/methods/analysis_execution_stage5_completed.md","29155161ea3c33c3f0dcf5e1c58a660b","29155161ea3c33c3f0dcf5e1c58a660b",TRUE
+"data/processed/reporting_stage6_v1_manifest.rds","hashes","reports/stage6_v1/figures/README.md","b1a38c817c6adaa4011101a04f3dc439","b1a38c817c6adaa4011101a04f3dc439",TRUE
+"data/processed/reporting_stage6_v1_manifest.rds","hashes","reports/stage6_v1/manuscript_methods_results.md","a79b789d190e974af2dcf044edf7cf90","a79b789d190e974af2dcf044edf7cf90",TRUE
+"data/processed/reporting_stage6_v1_manifest.rds","hashes","reports/stage6_v1/reporting_checklist_working.md","c0562e3e9c6e49341d0dbb9b87cb1e53","c0562e3e9c6e49341d0dbb9b87cb1e53",TRUE
+"data/processed/reporting_stage6_v1_manifest.rds","hashes","docs/methods/analysis_execution_stage6_sap_reconciliation.md","4c18ae25e10f161a52aa80151c675cd3","4c18ae25e10f161a52aa80151c675cd3",TRUE
+"data/processed/reporting_stage6_v1_manifest.rds","hashes","docs/methods/analysis_execution_stage6_reporting.md","f586b679b922de45ea81211dd3603a89","f586b679b922de45ea81211dd3603a89",TRUE
+"data/processed/methodological_manuscript_v1_manifest.rds","hashes","reports/metodologia_comentada_v1/manuscrito_metodologico_es.html","802d4fa3e631ba9e4a846aa0b9813a51","ac01133957cedf0769f698ac52d6b1a2",FALSE
+"data/processed/methodological_manuscript_v1_manifest.rds","hashes","reports/metodologia_comentada_v1/manuscrito_metodologico_es.md","0778b32745f2487607e979455c1fa78b","fa3becc29aa8b0271ddce23b68421a67",FALSE
+"data/processed/methodological_manuscript_v1_manifest.rds","hashes","reports/metodologia_comentada_v1/README.md","aa4be7047a1367f19d36fedaaa50da78","a6969468c5c8023df9318326b37a571c",FALSE
+"data/processed/same_month_death_sensitivity_v1.rds","input_hashes","protocol/amendments/001_zero_followup_time.qmd","ad810db2477156c7f69f4af9c70a3207","ad810db2477156c7f69f4af9c70a3207",TRUE

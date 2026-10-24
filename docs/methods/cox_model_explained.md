@@ -243,7 +243,7 @@ $$
 The Cox model becomes:
 
 $$
-h_i(t)=h_0(t)\exp(f\{\log_2(CRP_i)\}+\boldsymbol\gamma^T\mathbf Z_i)
+h_i(t)=h_0(t)\exp(f\lbrace \log_2(CRP_i)\rbrace +\boldsymbol\gamma^T\mathbf Z_i)
 $$
 
 The cubic pieces have matching value, slope and curvature at every knot. The restriction forces the function to be linear beyond the outer knots, where sparse data would otherwise permit unstable cubic behavior.
@@ -256,7 +256,7 @@ Individual spline coefficients are not epidemiological effects. They multiply ar
 
 $$
 HR(x,x_{ref})=
-\exp[f\{\log_2(x)\}-f\{\log_2(x_{ref})\}]
+\exp[f\lbrace \log_2(x)\rbrace -f\lbrace \log_2(x_{ref})\rbrace ]
 $$
 
 If 2 mg/L is the reference and the estimated HR at 8 mg/L is 1.45, the estimated hazard at 8 mg/L is 45% higher than at 2 mg/L, conditional on adjustment variables. It is not a cumulative mortality-risk difference.
@@ -349,7 +349,7 @@ $$
 and:
 
 $$
-CI_{95\%}=
+CI_{0.95}=
 \exp[
 \hat{\beta}\pm 1.96\,SE_{\mathrm{design}}(\hat{\beta})
 ]

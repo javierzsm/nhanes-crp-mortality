@@ -1,0 +1,13 @@
+path,mode,expressions,failures
+docs/methods/analysis_execution_stage3.md,markdown_escape_loss,1,0
+docs/methods/analysis_execution_stage3.md,source,1,0
+docs/methods/analysis_execution_stage4.md,markdown_escape_loss,2,0
+docs/methods/analysis_execution_stage4.md,source,2,0
+docs/methods/cox_model_explained.md,markdown_escape_loss,55,0
+docs/methods/cox_model_explained.md,source,55,0
+docs/methods/multiple_imputation_technical_spec_draft.md,markdown_escape_loss,2,0
+docs/methods/multiple_imputation_technical_spec_draft.md,source,2,0
+protocol/sap_v0.3.qmd,markdown_escape_loss,2,0
+protocol/sap_v0.3.qmd,source,2,0
+reports/same_month_death_sensitivity_v1/README.md,markdown_escape_loss,1,0
+reports/same_month_death_sensitivity_v1/README.md,source,1,0

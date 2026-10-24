@@ -37,11 +37,11 @@ All survey-weighted sensitivity analyses use the same primary Cox model
 specification as Script 06:
 
 $$
-h_i(t)=h_0(t)\exp\{
+h_i(t)=h_0(t)\exp\lbrace
 \beta_{CRP}\log_2(CRP_i)
 +f(age_i)
 +\boldsymbol{\gamma}^{T}\mathbf{Z}_i
-\}.
+\rbrace .
 $$
 
 The adjustment set is unchanged:
@@ -201,7 +201,7 @@ The primary reference estimate was:
 $$
 HR=1.1299
 \quad
-(95\%\ CI\ 1.1088\text{ to }1.1513).
+(\text{95 percent CI: }1.1088\text{ to }1.1513).
 $$
 
 Sensitivity estimates were:

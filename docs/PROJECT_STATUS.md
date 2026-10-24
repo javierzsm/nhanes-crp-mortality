@@ -51,16 +51,7 @@ remain unchanged. The Stage 6 implementation, aggregate reporting package and ma
 are included in the GitHub update requested after review. Consult Git history
 for the publication commit; generated HTML previews stay local.
 
-## Methodological reading companion and newly identified issue
-
-A separate [English methodological manuscript](../reports/metodologia_comentada_v1/manuscrito_metodologico_es.md)
-now explains the rationale, alternatives, mathematics and limitations in depth.
-Its local HTML has a navigable index and embedded native mathematics. The original
-sixteen numerical checks describe the 23 October source; the 24 October English
-and equation-rendering revision is recorded separately in the
-[documentation audit](../reports/documentation_quality_v1/README.md). Participant
-data, checkpoints and fitted estimates remain unchanged. Historical source-hash
-checks must be interpreted against their recorded documentation versions.
+## Amendment 001 sensitivity
 
 Reading Amendment 001 identified a remaining sensitivity commitment, now closed
 on 23 October 2026 in the [same-month-death addendum](../reports/same_month_death_sensitivity_v1/README.md).
@@ -69,9 +60,7 @@ the other two were already absent from the primary model. Excluding the two
 applicable deaths gives N=26,816, deaths=5,884 and HR=1.129632
 (95% CI 1.108576–1.151088), versus primary HR=1.129854. Fourteen checks passed,
 including reproduction of all primary coefficients/covariance and preservation
-of original Stage 5/6 and methodological-companion artifacts. The original
-companion records the historical discovery; the dated addendum supersedes its
-pending status. No MI rerun was required; its accepted result is unchanged.
+of original Stage 5/6 artifacts. The dated addendum records completion. No MI rerun was required; its accepted result is unchanged.
 
 ## Read these first when resuming
 
