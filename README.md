@@ -16,6 +16,8 @@ For the current handoff, authoritative artifact versions and next steps, see the
 
 **Reporting update — 24 October 2026:** SAP-prespecified sex/age-group interactions and descriptive influence diagnostics have now been completed after reconciliation. An illustrated [working Methods/Results draft](reports/stage6_v3/manuscript_methods_results.md), three integrated main figures, two [supplementary figures](reports/stage6_v3/supplementary_figures.md), and a [reporting checklist](reports/stage6_v1/reporting_checklist_working.md) are available. See the [Stage 6 report](docs/methods/analysis_execution_stage6_reporting.md) for results, validation and remaining publication tasks.
 
+The illustrated scientific manuscript is also available as a [downloadable PDF](output/pdf/nhanes_crp_mortality_main_v0.3.pdf), including the supplementary figures.
+
 The Amendment 001 sensitivity is documented in the [same-month-death sensitivity addendum](reports/same_month_death_sensitivity_v1/README.md).
 
 All maintained documentation is written in English. See the [documentation and equation-rendering audit](reports/documentation_quality_v1/README.md) for the local HTML build and checks.

@@ -32,3 +32,8 @@ __pycache__/
 # Personal study notes: keep locally, exclude from publication
 /reports/metodologia_comentada_v1/
 /src/R/21_validate_methodological_manuscript.R
+
+# Publish only the scientific manuscript PDF; personal PDFs stay local
+/output/pdf/*
+!/output/pdf/nhanes_crp_mortality_main_v0.3.pdf
+/tmp/pdfs/
